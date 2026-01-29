@@ -255,11 +255,11 @@ $data = dk_get_site_data();
                                 <img src="https://laserman.com.ar/wp-content/uploads/2026/01/Generated-Image-November-25-2025-8_20PM-1.png"
                                      class="w-full h-full object-cover" alt="Laserman 1">
                             </div>
-                            <img src="https://laserman.com.ar/wp-content/uploads/2026/01/grok-video-d4940b4d-eda5-483b-befd-e28384c7cfda-3-frame-at-0m5s.jpg"
+                            <img src="https://laserman.com.ar/wp-content/uploads/2026/01/dale-m-s-realismo-de-movimiento-humano--e1769290346532.png"
                                  class="w-full aspect-square object-cover" alt="Laserman 2">
                             <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LASERMAN-007_4_2_2-frame-at-0m16s-1-e1769288168804.jpg"
                                  class="w-full aspect-square object-cover" alt="Laserman 3">
-                            <img src="https://laserman.com.ar/wp-content/uploads/2026/01/dale-m-s-realismo-de-movimiento-humano--e1769290346532.png"
+                            <img src="https://laserman.com.ar/wp-content/uploads/2026/01/grok-video-d4940b4d-eda5-483b-befd-e28384c7cfda-3-frame-at-0m5s.jpg"
                                  class="w-full aspect-video object-cover col-span-2" alt="Laserman 4">
                         </div>
                         <a href="#contacto" class="mt-6 inline-block px-8 py-3 bg-neon text-black font-bold uppercase text-sm hover:bg-white transition">
