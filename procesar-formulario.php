@@ -1,37 +1,43 @@
 <?php
 header('Content-Type: application/json');
 
-// --- CONFIGURACIÓN ---
-$destinatario = "TU-EMAIL-AQUI@GMAIL.COM"; // <--- CAMBIA ESTO
-$asunto = "Nuevo Lead desde Laserman.com.ar";
+// --- CONFIGURACIÓN FORMSPREE ---
+$formspree_url = "https://formspree.io/f/xgvywzbq";
 
 // --- CAPTURA DE DATOS ---
-$nombre   = $_POST['nombre']   ?? 'Sin nombre';
-$email    = $_POST['email']    ?? 'Sin email';
-$telefono = $_POST['telefono'] ?? 'Sin telefono';
-$servicio = $_POST['servicio'] ?? 'No especificado';
+$nombre   = $_POST['nombre']   ?? '';
+$email    = $_POST['email']    ?? '';
+$telefono = $_POST['telefono'] ?? '';
+$servicio = $_POST['servicio'] ?? '';
 
-// --- VALIDACIÓN BÁSICA ---
-if (empty($email) || $email == 'Sin email') {
+// --- VALIDACIÓN ---
+if (empty($email)) {
     echo json_encode(['success' => false, 'message' => 'El email es obligatorio.']);
     exit;
 }
 
-// --- CUERPO DEL MENSAJE ---
-$cuerpo = "Has recibido una nueva consulta desde la web:\n\n";
-$cuerpo .= "Nombre: $nombre\n";
-$cuerpo .= "Email: $email\n";
-$cuerpo .= "WhatsApp: $telefono\n";
-$cuerpo .= "Servicio: $servicio\n";
-$cuerpo .= "Fecha: " . date('d/m/Y H:i:s') . "\n";
+// --- ENVIAR A FORMSPREE ---
+$data = array(
+    'nombre' => $nombre,
+    'email' => $email,
+    'telefono' => $telefono,
+    'servicio' => $servicio,
+    '_subject' => 'Nuevo Lead desde Laserman.com.ar'
+);
 
-// --- CABECERAS ---
-$headers = "From: web@laserman.com.ar\r\n";
-$headers .= "Reply-To: $email\r\n";
+$options = array(
+    'http' => array(
+        'header'  => "Content-type: application/json\r\n",
+        'method'  => 'POST',
+        'content' => json_encode($data)
+    )
+);
 
-// --- ENVÍO ---
-if (mail($destinatario, $asunto, $cuerpo, $headers)) {
-    echo json_encode(['success' => true]);
+$context = stream_context_create($options);
+$result = @file_get_contents($formspree_url, false, $context);
+
+if ($result !== false) {
+    echo json_encode(['success' => true, 'redirect' => '/gracias']);
 } else {
-    echo json_encode(['success' => false, 'message' => 'Error al enviar el correo.']);
+    echo json_encode(['success' => false, 'message' => 'Error al enviar.']);
 }
