@@ -6,7 +6,6 @@
 get_header();
 $data = dk_get_site_data();
 ?>
-
 <style>
 /* Secciones expandibles de servicios */
 .service-expanded {
@@ -18,7 +17,6 @@ $data = dk_get_site_data();
     max-height: 3000px;
     transition: max-height 0.8s ease-in;
 }
-
 /* Efecto de color en scroll para mobile */
 .scroll-colorize {
     transition: filter 0.6s ease;
@@ -26,13 +24,11 @@ $data = dk_get_site_data();
 .scroll-colorize.in-view {
     filter: grayscale(0) !important;
 }
-
 @media (min-width: 768px) {
     .scroll-colorize:hover {
         filter: grayscale(0) !important;
     }
 }
-
 /* Botones segmentados con estética láser */
 .laser-btn {
     position: relative;
@@ -61,7 +57,6 @@ $data = dk_get_site_data();
     0% { transform: translateX(-100%) rotate(45deg); }
     100% { transform: translateX(100%) rotate(45deg); }
 }
-
 /* Variantes sutiles para cada tipo */
 .laser-btn-solid::after {
     content: '';
@@ -76,17 +71,14 @@ $data = dk_get_site_data();
 .laser-btn-solid:hover::after {
     left: 100%;
 }
-
 .laser-btn-dashed {
     border-style: dashed;
     border-width: 2px;
 }
-
 .laser-btn-double {
     border-style: double;
     border-width: 3px;
 }
-
 /* Líneas decorativas láser */
 .laser-line {
     height: 1px;
@@ -98,7 +90,6 @@ $data = dk_get_site_data();
     0%, 100% { opacity: 0.3; }
     50% { opacity: 0.7; }
 }
-
 /* Decoración de esquinas */
 .corner-laser {
     position: absolute;
@@ -121,47 +112,30 @@ $data = dk_get_site_data();
          class="absolute inset-0 w-full h-full object-cover opacity-30 grayscale"
          alt="Hero Background">
     <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/80 to-transparent"></div>
-
     <div class="relative z-10 max-w-5xl">
         <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-6">
             El Futuro de los<br>
             <span class="text-neon neon-glow">Espectáculos en Argentina</span>
         </h1>
-
         <p class="text-lg md:text-xl text-zinc-300 mb-12 max-w-3xl mx-auto font-light">
             El único espectáculo de Laserman en Latinoamérica + Túneles inmersivos + Proyecciones de alto impacto
         </p>
-
-        <!-- Línea decorativa láser -->
         <div class="laser-line w-32 mx-auto mb-8"></div>
-
         <div class="flex flex-col gap-4 justify-center max-w-2xl mx-auto relative">
-            <!-- Esquinas decorativas -->
             <div class="corner-laser corner-laser-tl"></div>
             <div class="corner-laser corner-laser-tr"></div>
             <div class="corner-laser corner-laser-bl"></div>
             <div class="corner-laser corner-laser-br"></div>
-
-            <a href="#contacto"
-               onclick="trackEvent('InitiateContact', {method: 'hero_cta', client_type: 'entretenimiento', event_id: generateEventId()})"
-               class="laser-btn laser-btn-solid relative px-12 py-5 text-neon text-base font-bold tracking-wide uppercase text-center group">
+            <a href="#contacto" class="laser-btn laser-btn-solid relative px-12 py-5 text-neon text-base font-bold tracking-wide uppercase text-center group">
                 <span class="relative z-10">⚡ DISCOTECA / BOLICHE</span>
             </a>
-
-            <a href="#contacto"
-               onclick="trackEvent('InitiateContact', {method: 'hero_cta', client_type: 'institucional', event_id: generateEventId()})"
-               class="laser-btn laser-btn-dashed relative px-12 py-5 text-neon text-base font-bold tracking-wide uppercase text-center group">
+            <a href="#contacto" class="laser-btn laser-btn-dashed relative px-12 py-5 text-neon text-base font-bold tracking-wide uppercase text-center group">
                 <span class="relative z-10">🏛️ MUNICIPALIDAD / CULTURA</span>
             </a>
-
-            <a href="#contacto"
-               onclick="trackEvent('InitiateContact', {method: 'hero_cta', client_type: 'corporativo', event_id: generateEventId()})"
-               class="laser-btn laser-btn-double relative px-12 py-5 text-neon text-base font-bold tracking-wide uppercase text-center group">
+            <a href="#contacto" class="laser-btn laser-btn-double relative px-12 py-5 text-neon text-base font-bold tracking-wide uppercase text-center group">
                 <span class="relative z-10">💼 PRODUCTOR / EMPRESA</span>
             </a>
         </div>
-
-        <!-- Línea decorativa láser -->
         <div class="laser-line w-32 mx-auto mt-8"></div>
     </div>
 </section>
@@ -171,8 +145,6 @@ $data = dk_get_site_data();
 <!-- ============================================ -->
 <section class="py-20 px-4 md:px-6 bg-zinc-950 border-y border-zinc-900">
     <div class="max-w-7xl mx-auto">
-
-        <!-- Stats -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
             <div class="text-center border border-zinc-900 p-8 hover:border-neon transition-colors">
                 <div class="text-5xl md:text-6xl font-display font-black text-neon mb-3 neon-glow">15+</div>
@@ -191,8 +163,6 @@ $data = dk_get_site_data();
                 <div class="text-xs text-zinc-400 uppercase tracking-widest">Ciudades Recorridas</div>
             </div>
         </div>
-
-        <!-- Logos Gobiernos -->
         <div class="text-center">
             <p class="text-[10px] text-zinc-600 uppercase tracking-[0.5em] mb-8">Gobiernos que confiaron en nosotros</p>
             <div class="grid grid-cols-2 gap-6 md:gap-8 max-w-md mx-auto">
@@ -210,7 +180,6 @@ $data = dk_get_site_data();
 <!-- ============================================ -->
 <section id="servicios" class="py-32 px-3 md:px-6 bg-dark">
     <div class="max-w-7xl mx-auto">
-
         <div class="mb-20 text-center">
             <span class="text-neon font-display text-[10px] tracking-[0.6em] block mb-4">QUÉ OFRECEMOS</span>
             <h2 class="text-4xl md:text-6xl font-display font-bold uppercase leading-tight">
@@ -219,9 +188,7 @@ $data = dk_get_site_data();
             </h2>
             <div class="h-[1px] w-20 bg-neon mt-8 mx-auto"></div>
         </div>
-
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-zinc-900 border border-zinc-900">
-
             <!-- SERVICIO 1: SHOW LASERMAN ⭐ -->
             <div class="relative bg-dark lg:col-span-2 flex flex-col">
                 <div class="p-4 md:p-10 group hover:bg-zinc-900/30 transition-all">
@@ -240,13 +207,10 @@ $data = dk_get_site_data();
                         Un artista manipula rayos láser en vivo. Performance futurista que combina música, coreografía y tecnología.
                         <span class="text-white font-bold">Altamente viral - cada asistente filma y comparte.</span>
                     </p>
-                    <button onclick="toggleService('laserman'); trackEvent('ServiceView', {service: 'laserman', featured: true, event_id: generateEventId()})"
-                       class="inline-block text-neon text-xs uppercase tracking-widest hover:underline mb-4">
+                    <button onclick="toggleService('laserman')" class="inline-block text-neon text-xs uppercase tracking-widest hover:underline mb-4">
                         MÁS INFO →
                     </button>
                 </div>
-
-                <!-- Sección expandible -->
                 <div id="service-laserman" class="service-expanded border-t border-zinc-900">
                     <div class="p-4 md:p-10 bg-zinc-900/50">
                         <h4 class="text-2xl font-display font-bold text-white mb-6">Galería Show Laserman</h4>
@@ -268,7 +232,7 @@ $data = dk_get_site_data();
                     </div>
                 </div>
             </div>
-
+            
             <!-- SERVICIO 2: TÚNELES INMERSIVOS -->
             <div class="relative bg-dark flex flex-col">
                 <div class="p-4 md:p-10 group hover:bg-zinc-900/30 transition-all">
@@ -283,13 +247,10 @@ $data = dk_get_site_data();
                     <p class="text-sm text-zinc-300 leading-relaxed mb-6">
                         Entrada espectacular para tu evento. Ideal para recepciones, fiestas de 15, casamientos y activaciones de marca.
                     </p>
-                    <button onclick="toggleService('tuneles'); trackEvent('ServiceView', {service: 'tuneles', event_id: generateEventId()})"
-                       class="inline-block text-neon text-xs uppercase tracking-widest hover:underline mb-4">
+                    <button onclick="toggleService('tuneles')" class="inline-block text-neon text-xs uppercase tracking-widest hover:underline mb-4">
                         MÁS INFO →
                     </button>
                 </div>
-
-                <!-- Sección expandible -->
                 <div id="service-tuneles" class="service-expanded border-t border-zinc-900">
                     <div class="p-4 md:p-10 bg-zinc-900/50">
                         <h4 class="text-2xl font-display font-bold text-white mb-6">Galería Túneles</h4>
@@ -311,7 +272,7 @@ $data = dk_get_site_data();
                     </div>
                 </div>
             </div>
-
+            
             <!-- SERVICIO 3: PROYECCIONES LÁSER -->
             <div class="relative bg-dark flex flex-col">
                 <div class="p-4 md:p-10 group hover:bg-zinc-900/30 transition-all">
@@ -326,13 +287,10 @@ $data = dk_get_site_data();
                     <p class="text-sm text-zinc-300 leading-relaxed mb-6">
                         Logos, animaciones y mensajes proyectados en edificios, montañas o cualquier superficie. Visible a kilómetros.
                     </p>
-                    <button onclick="toggleService('proyecciones'); trackEvent('ServiceView', {service: 'proyecciones', event_id: generateEventId()})"
-                       class="inline-block text-neon text-xs uppercase tracking-widest hover:underline mb-4">
+                    <button onclick="toggleService('proyecciones')" class="inline-block text-neon text-xs uppercase tracking-widest hover:underline mb-4">
                         MÁS INFO →
                     </button>
                 </div>
-
-                <!-- Sección expandible -->
                 <div id="service-proyecciones" class="service-expanded border-t border-zinc-900">
                     <div class="p-4 md:p-10 bg-zinc-900/50">
                         <h4 class="text-2xl font-display font-bold text-white mb-6">Galería Proyecciones</h4>
@@ -354,7 +312,7 @@ $data = dk_get_site_data();
                     </div>
                 </div>
             </div>
-
+            
             <!-- SERVICIO 4: SHOW LED -->
             <div class="relative bg-dark flex flex-col">
                 <div class="p-4 md:p-10 group hover:bg-zinc-900/30 transition-all">
@@ -369,13 +327,10 @@ $data = dk_get_site_data();
                     <p class="text-sm text-zinc-300 leading-relaxed mb-6">
                         15 años animando eventos. Desde fiestas privadas hasta festivales masivos. Apuesta segura.
                     </p>
-                    <button onclick="toggleService('led'); trackEvent('ServiceView', {service: 'show_led', event_id: generateEventId()})"
-                       class="inline-block text-neon text-xs uppercase tracking-widest hover:underline mb-4">
+                    <button onclick="toggleService('led')" class="inline-block text-neon text-xs uppercase tracking-widest hover:underline mb-4">
                         MÁS INFO →
                     </button>
                 </div>
-
-                <!-- Sección expandible -->
                 <div id="service-led" class="service-expanded border-t border-zinc-900">
                     <div class="p-4 md:p-10 bg-zinc-900/50">
                         <h4 class="text-2xl font-display font-bold text-white mb-6">Galería Show LED</h4>
@@ -397,7 +352,7 @@ $data = dk_get_site_data();
                     </div>
                 </div>
             </div>
-
+            
             <!-- SERVICIO 5: PAQUETE COMPLETO -->
             <div class="relative bg-dark flex flex-col">
                 <div class="p-4 md:p-10 group hover:bg-zinc-900/30 transition-all">
@@ -415,13 +370,10 @@ $data = dk_get_site_data();
                     <p class="text-sm text-zinc-300 leading-relaxed mb-6">
                         Combiná Laserman + Túneles + Proyecciones para un evento que nadie va a olvidar. Consultá por paquetes.
                     </p>
-                    <button onclick="toggleService('paquete'); trackEvent('ServiceView', {service: 'paquete_completo', value_offer: true, event_id: generateEventId()})"
-                       class="inline-block text-neon text-xs uppercase tracking-widest hover:underline mb-4">
+                    <button onclick="toggleService('paquete')" class="inline-block text-neon text-xs uppercase tracking-widest hover:underline mb-4">
                         MÁS INFO →
                     </button>
                 </div>
-
-                <!-- Sección expandible -->
                 <div id="service-paquete" class="service-expanded border-t border-zinc-900">
                     <div class="p-4 md:p-10 bg-zinc-900/50">
                         <h4 class="text-2xl font-display font-bold text-white mb-6">Paquete Completo</h4>
@@ -443,34 +395,23 @@ $data = dk_get_site_data();
                     </div>
                 </div>
             </div>
-
         </div>
-
+        
         <!-- CTA bajo servicios -->
         <div class="text-center mt-16 relative">
             <div class="laser-line w-48 mx-auto mb-6"></div>
             <h3 class="text-neon text-sm mb-8 tracking-[0.3em] uppercase">Elegí tu tipo de evento</h3>
-
             <div class="flex flex-col md:flex-row gap-4 justify-center items-stretch max-w-5xl mx-auto">
-                <a href="#contacto"
-                   onclick="trackEvent('LeadGeneration', {source: 'services_cta', client_type: 'entretenimiento', event_id: generateEventId()})"
-                   class="laser-btn laser-btn-solid relative flex-1 px-8 py-5 text-neon font-bold text-sm uppercase tracking-widest text-center">
+                <a href="#contacto" class="laser-btn laser-btn-solid relative flex-1 px-8 py-5 text-neon font-bold text-sm uppercase tracking-widest text-center">
                     <span class="relative z-10">⚡ DISCOTECA / NOCHE</span>
                 </a>
-
-                <a href="#contacto"
-                   onclick="trackEvent('LeadGeneration', {source: 'services_cta', client_type: 'institucional', event_id: generateEventId()})"
-                   class="laser-btn laser-btn-dashed relative flex-1 px-8 py-5 text-neon font-bold text-sm uppercase tracking-widest text-center">
+                <a href="#contacto" class="laser-btn laser-btn-dashed relative flex-1 px-8 py-5 text-neon font-bold text-sm uppercase tracking-widest text-center">
                     <span class="relative z-10">🏛️ MUNICIPALIDAD / CULTURA</span>
                 </a>
-
-                <a href="#contacto"
-                   onclick="trackEvent('LeadGeneration', {source: 'services_cta', client_type: 'corporativo', event_id: generateEventId()})"
-                   class="laser-btn laser-btn-double relative flex-1 px-8 py-5 text-neon font-bold text-sm uppercase tracking-widest text-center">
+                <a href="#contacto" class="laser-btn laser-btn-double relative flex-1 px-8 py-5 text-neon font-bold text-sm uppercase tracking-widest text-center">
                     <span class="relative z-10">💼 CORPORATIVO / PRIVADO</span>
                 </a>
             </div>
-
             <div class="laser-line w-48 mx-auto mt-6"></div>
         </div>
     </div>
@@ -481,7 +422,6 @@ $data = dk_get_site_data();
 <!-- ============================================ -->
 <section id="galeria" class="py-32 px-3 md:px-6 bg-zinc-950 border-y border-zinc-900">
     <div class="max-w-7xl mx-auto">
-
         <div class="mb-20 text-center">
             <span class="text-neon font-display text-[10px] tracking-[0.6em] block mb-4">VIDEO DESTACADO</span>
             <h2 class="text-4xl md:text-6xl font-display font-bold uppercase leading-tight">
@@ -491,12 +431,8 @@ $data = dk_get_site_data();
             <div class="h-[1px] w-20 bg-neon mt-8 mx-auto"></div>
             <p class="mt-8 text-zinc-400 text-sm">Así se vive un evento con DK Laser</p>
         </div>
-
-        <!-- Videos Grid -->
         <div class="grid md:grid-cols-3 gap-2 md:gap-4">
-            <a href="https://youtube.com/shorts/R-4Ant-nqGk" target="_blank"
-               onclick="trackEvent('VideoView', {video: 'promo_principal', platform: 'youtube', event_id: generateEventId()})"
-               class="relative aspect-[9/16] group overflow-hidden border border-zinc-900 hover:border-neon transition-all">
+            <a href="https://youtube.com/shorts/R-4Ant-nqGk" target="_blank" class="relative aspect-[9/16] group overflow-hidden border border-zinc-900 hover:border-neon transition-all">
                 <img src="<?php echo esc_url($data['videos'][0]['thumbnail'] ?? 'https://laserman.com.ar/inicio/wp-content/uploads/2025/08/Generated-File-July-30-2025-11_37PM-frame-at-0m0s.jpg'); ?>"
                      class="w-full h-full object-cover scroll-colorize"
                      style="filter: grayscale(1);"
@@ -511,10 +447,7 @@ $data = dk_get_site_data();
                     <p class="text-zinc-400 text-xs mt-1">El show más viral</p>
                 </div>
             </a>
-
-            <a href="https://www.youtube.com/shorts/h6-5NnUaf44" target="_blank"
-               onclick="trackEvent('VideoView', {video: 'fiesta_chocolate', platform: 'youtube', event_id: generateEventId()})"
-               class="relative aspect-[9/16] group overflow-hidden border border-zinc-900 hover:border-neon transition-all">
+            <a href="https://www.youtube.com/shorts/h6-5NnUaf44" target="_blank" class="relative aspect-[9/16] group overflow-hidden border border-zinc-900 hover:border-neon transition-all">
                 <img src="<?php echo esc_url($data['videos'][1]['thumbnail'] ?? 'https://laserman.com.ar/inicio/wp-content/uploads/2025/08/Generated-File-July-14-2025-11_44PM-frame-at-0m0s.jpg'); ?>"
                      class="w-full h-full object-cover scroll-colorize"
                      style="filter: grayscale(1);"
@@ -529,10 +462,7 @@ $data = dk_get_site_data();
                     <p class="text-zinc-400 text-xs mt-1">Bariloche, Río Negro</p>
                 </div>
             </a>
-
-            <a href="https://youtube.com/shorts/rVg2YEs9OWk" target="_blank"
-               onclick="trackEvent('VideoView', {video: 'fiesta_pionero', platform: 'youtube', event_id: generateEventId()})"
-               class="relative aspect-[9/16] group overflow-hidden border border-zinc-900 hover:border-neon transition-all">
+            <a href="https://youtube.com/shorts/rVg2YEs9OWk" target="_blank" class="relative aspect-[9/16] group overflow-hidden border border-zinc-900 hover:border-neon transition-all">
                 <img src="<?php echo esc_url($data['videos'][2]['thumbnail'] ?? 'https://laserman.com.ar/inicio/wp-content/uploads/2025/08/359722384291094536-frame-at-0m4s-e1755810774492.jpg'); ?>"
                      class="w-full h-full object-cover scroll-colorize"
                      style="filter: grayscale(1);"
@@ -556,7 +486,6 @@ $data = dk_get_site_data();
 <!-- ============================================ -->
 <section id="clientes" class="py-32 px-4 md:px-6 bg-dark">
     <div class="max-w-7xl mx-auto">
-
         <div class="mb-20 text-center">
             <span class="text-neon font-display text-[10px] tracking-[0.6em] block mb-4">IMPACTO NACIONAL</span>
             <h2 class="text-4xl md:text-6xl font-display font-bold uppercase leading-tight">
@@ -565,8 +494,6 @@ $data = dk_get_site_data();
             </h2>
             <div class="h-[1px] w-20 bg-neon mt-8 mx-auto"></div>
         </div>
-
-        <!-- Fiestas Nacionales (Badges) -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
             <?php foreach ($data['festivals'] as $festival) : ?>
             <div class="border border-zinc-900 p-6 hover:border-neon transition-all">
@@ -582,8 +509,6 @@ $data = dk_get_site_data();
             </div>
             <?php endforeach; ?>
         </div>
-
-        <!-- Marcas que Confiaron -->
         <div class="border-t border-zinc-900 pt-12">
             <p class="text-center text-[10px] text-zinc-600 uppercase tracking-[0.5em] mb-8">Marcas que confiaron</p>
             <div class="flex flex-wrap justify-center items-center gap-12 opacity-50 hover:opacity-100 transition-opacity">
@@ -602,7 +527,6 @@ $data = dk_get_site_data();
 <!-- ============================================ -->
 <section id="testimonios" class="py-32 px-3 md:px-6 bg-zinc-950 border-y border-zinc-900">
     <div class="max-w-6xl mx-auto">
-
         <div class="mb-20 text-center">
             <span class="text-neon font-display text-[10px] tracking-[0.6em] block mb-4">TESTIMONIOS</span>
             <h2 class="text-4xl md:text-6xl font-display font-bold uppercase leading-tight">
@@ -611,7 +535,6 @@ $data = dk_get_site_data();
             </h2>
             <div class="h-[1px] w-20 bg-neon mt-8 mx-auto"></div>
         </div>
-
         <div class="grid md:grid-cols-3 gap-px bg-zinc-900 border border-zinc-900">
             <?php foreach ($data['testimonials'] as $testimonial) : ?>
             <div class="p-5 md:p-10 bg-dark hover:bg-zinc-900/50 transition-all">
@@ -641,9 +564,7 @@ $data = dk_get_site_data();
          class="absolute inset-0 w-full h-full object-cover opacity-20 grayscale"
          alt="Background">
     <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/90 to-dark"></div>
-
     <div class="max-w-3xl mx-auto relative z-10">
-
         <div class="mb-12 text-center">
             <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold uppercase mb-6 leading-tight">
                 ¿Listo para un Evento<br>
@@ -652,29 +573,24 @@ $data = dk_get_site_data();
             <p class="text-xl text-zinc-300 mb-4">Gira Nacional 2026 - Cupos Limitados</p>
             <p class="text-sm text-zinc-500">Respondemos en menos de 24hs</p>
         </div>
-
         <div class="border-2 border-neon/30 bg-neon/5 p-12">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-neon to-transparent opacity-50"></div>
-
             <form id="contactForm" class="space-y-6 mb-8">
                 <input type="text"
                        name="nombre"
                        placeholder="NOMBRE"
                        required
                        class="w-full bg-transparent border-b border-zinc-800 py-3 text-white outline-none focus:border-neon text-center tracking-widest text-sm">
-
                 <input type="email"
                        name="email"
                        placeholder="EMAIL"
                        required
                        class="w-full bg-transparent border-b border-zinc-800 py-3 text-white outline-none focus:border-neon text-center tracking-widest text-sm">
-
                 <input type="tel"
                        name="telefono"
                        placeholder="WHATSAPP"
                        required
                        class="w-full bg-transparent border-b border-zinc-800 py-3 text-white outline-none focus:border-neon text-center tracking-widest text-sm">
-
                 <select name="servicio"
                         class="w-full bg-transparent border-b border-zinc-800 py-3 text-white outline-none focus:border-neon text-center tracking-widest text-sm"
                         required>
@@ -685,7 +601,6 @@ $data = dk_get_site_data();
                     <option value="proyecciones" class="bg-black">Proyecciones</option>
                     <option value="led" class="bg-black">Show LED</option>
                 </select>
-
                 <button type="submit"
                         id="submitBtn"
                         class="w-full py-5 bg-neon text-black font-bold font-display tracking-[0.2em] hover:bg-white transition-colors uppercase text-base shadow-lg neon-box flex items-center justify-center gap-3">
@@ -695,34 +610,26 @@ $data = dk_get_site_data();
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
                 </button>
-
-                <!-- Mensaje de Éxito -->
                 <div id="formSuccess" class="hidden mt-6 p-6 border-2 border-neon bg-neon/10 text-center">
                     <div class="text-4xl mb-3">✅</div>
                     <p class="text-neon font-bold text-lg mb-2">¡GRACIAS POR TU CONSULTA!</p>
                     <p class="text-white text-sm">Te contactaremos en menos de 24hs para cotizar tu evento.</p>
                 </div>
-
-                <!-- Mensaje de Error -->
                 <div id="formError" class="hidden mt-6 p-6 border-2 border-red-500 bg-red-500/10 text-center">
                     <div class="text-4xl mb-3">⚠️</div>
                     <p class="text-red-500 font-bold text-lg mb-2">ERROR AL ENVIAR</p>
                     <p class="text-white text-sm">Por favor, contactanos directamente por WhatsApp.</p>
                 </div>
             </form>
-
-            <!-- Contacto Directo -->
             <div class="grid md:grid-cols-2 gap-4">
                 <a href="<?php echo dk_whatsapp_url('Hola, quiero cotizar un evento'); ?>"
                    target="_blank"
-                   onclick="trackEvent('InitiateContact', {method: 'whatsapp', source: 'cta_final', event_id: generateEventId()})"
                    class="p-6 border border-zinc-800 hover:border-neon transition-all text-center group">
                     <div class="text-3xl mb-2">💬</div>
                     <p class="text-sm font-bold text-white uppercase group-hover:text-neon transition-colors">Hablemos por WhatsApp</p>
                     <p class="text-[10px] text-zinc-500 mt-1">+54 9 2995 920418</p>
                 </a>
                 <a href="tel:+5492995920418"
-                   onclick="trackEvent('InitiateContact', {method: 'phone', source: 'cta_final', event_id: generateEventId()})"
                    class="p-6 border border-zinc-800 hover:border-neon transition-all text-center group">
                     <div class="text-3xl mb-2">📞</div>
                     <p class="text-sm font-bold text-white uppercase group-hover:text-neon transition-colors">Llamar Ahora</p>
@@ -734,40 +641,19 @@ $data = dk_get_site_data();
 </section>
 
 <script>
-// ========================================
-// GENERADOR DE EVENT_ID ÚNICO PARA DEDUPLICACIÓN
-// ========================================
-function generateEventId() {
-    const timestamp = Date.now();
-    const random = Math.random().toString(36).substr(2, 9);
-    return `laserman_${timestamp}_${random}`;
-}
-
-// ========================================
-// TOGGLE DE SERVICIOS EXPANDIBLES
-// ========================================
 function toggleService(serviceId) {
     const expanded = document.getElementById('service-' + serviceId);
     const allExpanded = document.querySelectorAll('.service-expanded');
-
-    // Cerrar todos los demás
     allExpanded.forEach(el => {
         if (el.id !== 'service-' + serviceId) {
             el.classList.remove('active');
         }
     });
-
-    // Toggle el actual
     expanded.classList.toggle('active');
 }
 
-// ========================================
-// EFECTO DE COLOR EN SCROLL (MOBILE)
-// ========================================
 document.addEventListener('DOMContentLoaded', function() {
     const colorizeElements = document.querySelectorAll('.scroll-colorize');
-    
-    // Intersection Observer para detectar cuando el elemento está en el centro
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
@@ -777,10 +663,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, {
-        threshold: [0.5], // Activar cuando el 50% del elemento esté visible
-        rootMargin: '-25% 0px -25% 0px' // Centrado en pantalla
+        threshold: [0.5],
+        rootMargin: '-25% 0px -25% 0px'
     });
-    
     colorizeElements.forEach(el => observer.observe(el));
 });
 </script>
