@@ -3,39 +3,13 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="description" content="Show de manipulación láser único en Latinoamérica. 15 años transformando fiestas nacionales, eventos corporativos y festivales con tecnología de vanguardia.">
-
+    
     <!-- Open Graph -->
     <meta property="og:title" content="DK LASERMAN | El Show Láser #1 de Argentina">
     <meta property="og:description" content="El único espectáculo de manipulación láser en vivo de Latinoamérica para eventos de alto nivel.">
     <meta property="og:image" content="https://laserman.com.ar/wp-content/uploads/2025/12/Video_Realista_Backstage_Subida_Escenario.mp4_snapshot_00.07.721.jpg">
     <meta property="og:type" content="website">
-
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WQD926FF');</script>
-    <!-- End Google Tag Manager -->
-
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1323852599172314');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1323852599172314&ev=PageView&noscript=1"/></noscript>
-    <!-- End Meta Pixel Code -->
 
     <?php wp_head(); ?>
     
@@ -94,7 +68,6 @@
             pointer-events: auto;
         }
 
-        /* Márgenes responsivos para móvil - fotos más grandes */
         @media (max-width: 767px) {
             .section-mobile-adjust {
                 padding-left: 1rem !important;
@@ -124,19 +97,12 @@
 </head>
 
 <body <?php body_class('bg-pattern'); ?>>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQD926FF"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 <?php wp_body_open(); ?>
 
 <?php $data = dk_get_site_data(); ?>
 
-<!-- HEADER -->
 <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-        
-        <!-- Logo -->
         <a href="#inicio" class="flex items-center gap-3 group">
             <div class="w-2 h-2 bg-neon rounded-full animate-pulse shadow-[0_0_10px_#00ff1d]"></div>
             <span class="font-display font-bold text-lg tracking-wider">
@@ -144,29 +110,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </span>
         </a>
         
-        <!-- Nav Desktop -->
         <nav class="hidden md:flex items-center gap-8">
             <a href="#servicios" class="text-[10px] text-white/40 hover:text-neon transition-colors uppercase tracking-[0.3em]">Servicios</a>
             <a href="#galeria" class="text-[10px] text-white/40 hover:text-neon transition-colors uppercase tracking-[0.3em]">Videos</a>
             <a href="#clientes" class="text-[10px] text-white/40 hover:text-neon transition-colors uppercase tracking-[0.3em]">Trayectoria</a>
-            <a href="#contacto"
-               onclick="trackEvent('InitiateContact', {method: 'nav_click', source: 'header'})"
-               class="px-6 py-2 bg-neon text-black text-[9px] font-black uppercase tracking-widest hover:scale-105 transition-transform">
+            <a href="#contacto" class="px-6 py-2 bg-neon text-black text-[9px] font-black uppercase tracking-widest hover:scale-105 transition-transform">
                 Cotizar
             </a>
         </nav>
         
-        <!-- Hamburger Mobile -->
         <button class="md:hidden text-white p-2" onclick="toggleMobileMenu()">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
         </button>
     </div>
-
 </header>
 
-<!-- Mobile Menu (fuera del header para evitar superposición) -->
 <div id="mobileMenu" class="mobile-menu fixed inset-0 bg-black/98 z-[9999] flex flex-col items-center justify-center gap-8 md:hidden">
     <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 text-white/50 hover:text-neon transition-colors">
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -177,7 +137,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="#galeria" onclick="toggleMobileMenu()" class="text-2xl font-display font-bold text-white hover:text-neon transition-colors">Videos</a>
     <a href="#clientes" onclick="toggleMobileMenu()" class="text-2xl font-display font-bold text-white hover:text-neon transition-colors">Trayectoria</a>
     <a href="#testimonios" onclick="toggleMobileMenu()" class="text-2xl font-display font-bold text-white hover:text-neon transition-colors">Testimonios</a>
-    <a href="#contacto" onclick="toggleMobileMenu(); trackEvent('InitiateContact', {method: 'mobile_menu', source: 'header'})" class="px-8 py-3 bg-neon text-black font-bold uppercase tracking-wide hover:bg-white transition-colors">Cotizar Ahora</a>
+    <a href="#contacto" onclick="toggleMobileMenu()" class="px-8 py-3 bg-neon text-black font-bold uppercase tracking-wide hover:bg-white transition-colors">Cotizar Ahora</a>
 </div>
 
 <main>
