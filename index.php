@@ -229,9 +229,9 @@ $data = dk_get_site_data();
             <div class="relative bg-dark lg:col-span-2 flex flex-col lg:justify-end">
                 <div class="p-4 md:p-10 group hover:bg-zinc-900/30 transition-all">
                     <!-- Fotos adicionales solo en desktop -->
-                    <div class="hidden lg:grid grid-cols-2 gap-2 mb-2">
+                    <div class="hidden lg:block mb-2">
                         <img src="https://laserman.com.ar/wp-content/uploads/2026/01/task_01kfe7ne94frmsjd5kj4ty3can_1768930654_img_0.webp"
-                             class="w-full aspect-video object-cover scroll-colorize"
+                             class="w-full aspect-video object-cover scroll-colorize mb-2"
                              style="filter: grayscale(1);"
                              alt="Túnel preview 1">
                         <img src="https://laserman.com.ar/wp-content/uploads/2026/01/VID_20250818_052243_191-frame-at-0m4s.jpg"
@@ -239,7 +239,7 @@ $data = dk_get_site_data();
                              style="filter: grayscale(1);"
                              alt="Túnel preview 2">
                     </div>
-                    <div class="mb-6">
+                    <div class="mb-6 lg:mb-2">
                         <img src="https://laserman.com.ar/wp-content/uploads/2026/01/b.jpg"
                              class="w-full aspect-video object-cover scroll-colorize"
                              style="filter: grayscale(1);"
@@ -323,7 +323,7 @@ $data = dk_get_site_data();
                         💰 MEJOR VALOR
                     </div>
                     <div class="mb-6">
-                        <img src="<?php echo esc_url($data['services'][4]['image'] ?? $data['services'][0]['image']); ?>"
+                        <img src="https://laserman.com.ar/wp-content/uploads/2026/01/corrientes-01.jpg"
                              class="w-full aspect-video object-cover scroll-colorize"
                              style="filter: grayscale(1);"
                              alt="Paquete Completo">
