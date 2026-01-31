@@ -157,7 +157,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 </header>
 
-<div id="mobileMenu" class="mobile-menu fixed inset-0 bg-black/98 z-[9999] flex flex-col items-center justify-center gap-8 md:hidden">
+<div id="mobileMenu" class="mobile-menu fixed inset-0 bg-black z-[9999] flex flex-col items-center justify-center gap-8">
     <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 text-white/50 hover:text-neon transition-colors">
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
