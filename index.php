@@ -160,11 +160,11 @@ $data = dk_get_site_data();
         </div>
         <div class="text-center">
             <p class="text-[10px] text-zinc-600 uppercase tracking-[0.5em] mb-8">Gobiernos que confiaron en nosotros</p>
-            <div class="grid grid-cols-2 gap-6 md:gap-8 max-w-md mx-auto">
-                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-rio-negro.png" alt="Río Negro" class="h-16 md:h-20 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
-                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-misiones.png" alt="Misiones" class="h-16 md:h-20 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
-                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-formosa.png" alt="Formosa" class="h-16 md:h-20 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
-                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-NEUQUEN2.png" alt="Neuquén" class="h-16 md:h-20 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
+            <div class="grid grid-cols-2 gap-6 md:gap-8 max-w-2xl mx-auto">
+                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-rio-negro.png" alt="Río Negro" class="h-24 md:h-32 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
+                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-misiones.png" alt="Misiones" class="h-24 md:h-32 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
+                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-formosa.png" alt="Formosa" class="h-24 md:h-32 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
+                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-NEUQUEN2.png" alt="Neuquén" class="h-24 md:h-32 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
             </div>
         </div>
     </div>
