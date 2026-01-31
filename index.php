@@ -160,11 +160,11 @@ $data = dk_get_site_data();
         </div>
         <div class="text-center">
             <p class="text-[10px] text-zinc-600 uppercase tracking-[0.5em] mb-8">Gobiernos que confiaron en nosotros</p>
-            <div class="grid grid-cols-2 gap-6 md:gap-8 max-w-md mx-auto">
-                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-rio-negro.png" alt="Río Negro" class="h-16 md:h-20 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
-                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-misiones.png" alt="Misiones" class="h-16 md:h-20 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
-                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-formosa.png" alt="Formosa" class="h-16 md:h-20 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
-                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-NEUQUEN2.png" alt="Neuquén" class="h-16 md:h-20 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
+            <div class="grid grid-cols-2 gap-6 md:gap-8 max-w-2xl mx-auto">
+                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-rio-negro.png" alt="Río Negro" class="h-24 md:h-32 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
+                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-misiones.png" alt="Misiones" class="h-24 md:h-32 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
+                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-formosa.png" alt="Formosa" class="h-24 md:h-32 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
+                <img src="https://laserman.com.ar/wp-content/uploads/2026/01/LOGO-NEUQUEN2.png" alt="Neuquén" class="h-24 md:h-32 w-auto mx-auto opacity-70 hover:opacity-100 transition-opacity">
             </div>
         </div>
     </div>
@@ -228,7 +228,14 @@ $data = dk_get_site_data();
             <!-- SERVICIO 2: TÚNELES INMERSIVOS -->
             <div class="relative bg-dark lg:col-span-2 flex flex-col lg:justify-end">
                 <div class="p-4 md:p-10 group hover:bg-zinc-900/30 transition-all">
-                    <div class="mb-6">
+                    <!-- Foto adicional solo en desktop -->
+                    <div class="hidden lg:block mb-2">
+                        <img src="https://laserman.com.ar/wp-content/uploads/2026/01/task_01kfe7ne94frmsjd5kj4ty3can_1768930654_img_0.webp"
+                             class="w-full aspect-video object-cover scroll-colorize"
+                             style="filter: grayscale(1);"
+                             alt="Túnel preview">
+                    </div>
+                    <div class="mb-6 lg:mb-2">
                         <img src="https://laserman.com.ar/wp-content/uploads/2026/01/b.jpg"
                              class="w-full aspect-video object-cover scroll-colorize"
                              style="filter: grayscale(1);"
@@ -312,7 +319,7 @@ $data = dk_get_site_data();
                         💰 MEJOR VALOR
                     </div>
                     <div class="mb-6">
-                        <img src="<?php echo esc_url($data['services'][4]['image'] ?? $data['services'][0]['image']); ?>"
+                        <img src="https://laserman.com.ar/wp-content/uploads/2026/01/corrientes-01.jpg"
                              class="w-full aspect-video object-cover scroll-colorize"
                              style="filter: grayscale(1);"
                              alt="Paquete Completo">
@@ -514,7 +521,7 @@ $data = dk_get_site_data();
         </div>
         <div class="border-2 border-neon/30 bg-neon/5 p-12">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-neon to-transparent opacity-50"></div>
-            <form id="contactForm" class="space-y-6 mb-8">
+            <form id="contactForm" action="https://formspree.io/f/xgvywzbq" method="POST" class="space-y-6 mb-8">
                 <input type="text"
                        name="nombre"
                        placeholder="NOMBRE"
