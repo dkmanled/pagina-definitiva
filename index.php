@@ -6,6 +6,7 @@
 get_header();
 $data = dk_get_site_data();
 ?>
+
 <style>
 /* Secciones expandibles de servicios */
 .service-expanded {
@@ -104,9 +105,6 @@ $data = dk_get_site_data();
 .corner-laser-br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
 </style>
 
-<!-- ============================================ -->
-<!-- 1️⃣ HERO - IMPACTO INICIAL -->
-<!-- ============================================ -->
 <section id="inicio" class="min-h-screen flex flex-col justify-center items-center text-center px-4 md:px-6 relative overflow-hidden pt-24 md:pt-0">
     <img src="<?php echo esc_url($data['hero_image']); ?>"
          class="absolute inset-0 w-full h-full object-cover opacity-30 grayscale"
@@ -140,9 +138,6 @@ $data = dk_get_site_data();
     </div>
 </section>
 
-<!-- ============================================ -->
-<!-- 2️⃣ PRUEBA SOCIAL RÁPIDA -->
-<!-- ============================================ -->
 <section class="py-20 px-4 md:px-6 bg-zinc-950 border-y border-zinc-900">
     <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
@@ -175,9 +170,6 @@ $data = dk_get_site_data();
     </div>
 </section>
 
-<!-- ============================================ -->
-<!-- 3️⃣ QUÉ OFRECEMOS - 5 SERVICIOS -->
-<!-- ============================================ -->
 <section id="servicios" class="py-32 px-3 md:px-6 bg-dark">
     <div class="max-w-7xl mx-auto">
         <div class="mb-20 text-center">
@@ -357,7 +349,6 @@ $data = dk_get_site_data();
             </div>
         </div>
         
-        <!-- CTA bajo servicios -->
         <div class="text-center mt-16 relative">
             <div class="laser-line w-48 mx-auto mb-6"></div>
             <h3 class="text-neon text-sm mb-8 tracking-[0.3em] uppercase">Elegí tu tipo de evento</h3>
@@ -377,9 +368,6 @@ $data = dk_get_site_data();
     </div>
 </section>
 
-<!-- ============================================ -->
-<!-- 4️⃣ VIDEO DESTACADO -->
-<!-- ============================================ -->
 <section id="galeria" class="py-32 px-3 md:px-6 bg-zinc-950 border-y border-zinc-900">
     <div class="max-w-7xl mx-auto">
         <div class="mb-20 text-center">
@@ -441,9 +429,6 @@ $data = dk_get_site_data();
     </div>
 </section>
 
-<!-- ============================================ -->
-<!-- 5️⃣ IMPACTO NACIONAL -->
-<!-- ============================================ -->
 <section id="clientes" class="py-32 px-4 md:px-6 bg-dark">
     <div class="max-w-7xl mx-auto">
         <div class="mb-20 text-center">
@@ -482,9 +467,6 @@ $data = dk_get_site_data();
     </div>
 </section>
 
-<!-- ============================================ -->
-<!-- 6️⃣ TESTIMONIOS -->
-<!-- ============================================ -->
 <section id="testimonios" class="py-32 px-3 md:px-6 bg-zinc-950 border-y border-zinc-900">
     <div class="max-w-6xl mx-auto">
         <div class="mb-20 text-center">
@@ -516,9 +498,6 @@ $data = dk_get_site_data();
     </div>
 </section>
 
-<!-- ============================================ -->
-<!-- 7️⃣ CTA FINAL - CIERRE DE VENTA -->
-<!-- ============================================ -->
 <section id="contacto" class="py-32 px-4 md:px-6 bg-dark relative overflow-hidden">
     <img src="<?php echo esc_url($data['hero_image']); ?>"
          class="absolute inset-0 w-full h-full object-cover opacity-20 grayscale"
@@ -587,13 +566,13 @@ $data = dk_get_site_data();
                    class="p-6 border border-zinc-800 hover:border-neon transition-all text-center group">
                     <div class="text-3xl mb-2">💬</div>
                     <p class="text-sm font-bold text-white uppercase group-hover:text-neon transition-colors">Hablemos por WhatsApp</p>
-                    <p class="text-[10px] text-zinc-500 mt-1">+54 9 2995 920418</p>
+                    <p class="text-left text-[10px] text-zinc-500 mt-1">+54 9 2995 920418</p>
                 </a>
                 <a href="tel:+5492995920418"
                    class="p-6 border border-zinc-800 hover:border-neon transition-all text-center group">
                     <div class="text-3xl mb-2">📞</div>
                     <p class="text-sm font-bold text-white uppercase group-hover:text-neon transition-colors">Llamar Ahora</p>
-                    <p class="text-[10px] text-zinc-500 mt-1">Respuesta inmediata</p>
+                    <p class="text-left text-[10px] text-zinc-500 mt-1">Respuesta inmediata</p>
                 </a>
             </div>
         </div>

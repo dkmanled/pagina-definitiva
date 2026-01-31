@@ -1,9 +1,9 @@
 <?php
 /**
  * DK Laserman Theme - Functions
- * 
- * @package DK_Laserman
+ * * @package DK_Laserman
  * @version 2026.01
+ * * ACTUALIZADO: Tracking optimizado para Stape + Meta CAPI + Redirección a Gracias
  */
 
 if (!defined('ABSPATH')) exit;
@@ -227,370 +227,177 @@ function dk_get_site_data() {
 
 /**
  * Footer Scripts - Tracking & Interactions
+ * ACTUALIZADO: Optimizado para Stape + Meta CAPI + Redirect
+ * Pixel ID: 899449552583355
  */
-function dk_footer_scripts() {
+function laserman_tracking_2026() {
     ?>
     <script>
-    // ==========================================
-    // GENERADOR DE EVENT_ID ÚNICO PARA DEDUPLICACIÓN
-    // ==========================================
-    function generateEventId() {
-        const timestamp = Date.now();
-        const random = Math.random().toString(36).substr(2, 9);
-        return `laserman_${timestamp}_${random}`;
-    }
+    // =============================================
+    // FUNCIONES AUXILIARES
+    // =============================================
 
-    // ==========================================
-    // HELPER PARA LEER COOKIES
-    // ==========================================
     function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-        return null;
+      var value = "; " + document.cookie;
+      var parts = value.split("; " + name + "=");
+      if (parts.length == 2) return parts.pop().split(";").shift();
+      return '';
     }
 
-    // ==========================================
-    // TRACKING SYSTEM
-    // ==========================================
-    function trackEvent(eventName, params = {}, userData = null) {
-        const eventData = {
-            event: eventName,
-            timestamp: new Date().toISOString(),
-            page_url: window.location.href,
-            ...params
-        };
-
-        // Si hay user_data, agregarlo
-        if (userData) {
-            eventData.user_data = userData;
-        }
-
-        console.log('📊 Event:', eventName, params, userData ? '+ user_data' : '');
-
-        // Meta Pixel
-        if (typeof fbq === 'function') {
-            if (['PageView', 'ViewContent', 'Lead', 'InitiateContact'].includes(eventName)) {
-                fbq('track', eventName, params);
-            } else {
-                fbq('trackCustom', eventName, params);
-            }
-        }
-
-        // GTM dataLayer
-        if (window.dataLayer) {
-            window.dataLayer.push(eventData);
-        }
-
-        // Local storage
-        try {
-            let events = JSON.parse(localStorage.getItem('dk_events') || '[]');
-            events.push(eventData);
-            if (events.length > 100) events = events.slice(-100);
-            localStorage.setItem('dk_events', JSON.stringify(events));
-        } catch (e) {}
+    function generateEventId(eventName) {
+      return 'laserman_' + eventName + '_' + Date.now() + '_' + Math.random().toString(36).substr(2,9);
     }
 
-    // ==========================================
-    // SEGMENTATION
-    // ==========================================
-    function selectSegment(segmentType, leadQuality) {
-        trackEvent('SegmentSelection', {
-            segment_type: segmentType,
-            lead_quality: leadQuality
-        });
+    // =============================================
+    // 1. SEGMENT SELECTION - 3 Botones de público
+    // =============================================
 
-        if (segmentType === 'social') {
-            document.getElementById('excludedMessage').classList.remove('hidden');
-            trackEvent('LeadExcluded', { reason: 'social_event' });
-            return;
-        }
-
-        document.getElementById('excludedMessage').classList.add('hidden');
-        sessionStorage.setItem('user_segment', segmentType);
-        sessionStorage.setItem('lead_quality', leadQuality);
-
-        // Navegar a sección específica según el tipo de segmento
-        let targetSection = 'show'; // Por defecto va al show
-
-        // Mapear cada segmento a su sección correspondiente
-        const segmentSections = {
-            'municipal': 'clientes',      // Municipales ven clientes/gobiernos
-            'corporativo': 'servicios',   // Corporativos ven servicios
-            'festival': 'show'            // Festivales ven el show
-        };
-
-        if (segmentSections[segmentType]) {
-            targetSection = segmentSections[segmentType];
-        }
-
-        const section = document.getElementById(targetSection);
-        if (section) {
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+    function trackSegmentSelection(segment) {
+      var eventId = generateEventId('SegmentSelection');
+      
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'SegmentSelection',
+        'event_id': eventId,
+        'segment': segment
+      });
+      
+      console.log('SegmentSelection:', segment, eventId);
     }
 
-    // ==========================================
-    // MOBILE MENU
-    // ==========================================
-    function toggleMobileMenu() {
-        document.getElementById('mobileMenu').classList.toggle('open');
+    // =============================================
+    // 2. WHATSAPP CLICK
+    // =============================================
+
+    function trackWhatsAppClick() {
+      var eventId = generateEventId('Contact');
+      
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'WhatsAppClick',
+        'event_id': eventId,
+        'method': 'whatsapp'
+      });
+      
+      console.log('WhatsAppClick:', eventId);
     }
 
-    // ==========================================
-    // INITIALIZATION
-    // ==========================================
+    // =============================================
+    // 3. LEAD - Formulario de contacto
+    // =============================================
+
+    function trackLead(formData) {
+      var eventId = generateEventId('Lead');
+      
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'Lead',
+        'event_id': eventId,
+        'user_data': {
+          'email': formData.email || '',
+          'phone': formData.phone || '',
+          'first_name': formData.name || '',
+          'fbp': getCookie('_fbp'),
+          'fbc': getCookie('_fbc')
+        },
+        'service': formData.service || ''
+      });
+      
+      console.log('Lead:', eventId, formData);
+    }
+
+    // =============================================
+    // LISTENERS AUTOMÁTICOS
+    // =============================================
+
     document.addEventListener('DOMContentLoaded', function() {
+      
+      // ---- BOTONES DE SEGMENTO ----
+      document.querySelectorAll('a[href*="#contacto"]').forEach(function(btn) {
+        var text = btn.textContent.toLowerCase();
         
-        // Header scroll effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('bg-black/95', 'backdrop-blur-md', 'border-b', 'border-white/5');
-            } else {
-                header.classList.remove('bg-black/95', 'backdrop-blur-md', 'border-b', 'border-white/5');
-            }
-        });
-        
-        // Fade in animations
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-        
-        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-        
-        // Track PageView
-        trackEvent('PageView', { page_title: document.title });
-        
-        // Scroll depth tracking
-        let scrollTracked = { 25: false, 50: false, 75: false, 100: false };
-        window.addEventListener('scroll', () => {
-            const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
-            [25, 50, 75, 100].forEach(threshold => {
-                if (scrollPercent >= threshold && !scrollTracked[threshold]) {
-                    scrollTracked[threshold] = true;
-                    trackEvent('ScrollDepth', { depth: threshold });
-                }
-            });
-        });
-        
-        // Time on page
-        let timeOnPage = 0;
-        setInterval(() => {
-            timeOnPage += 30;
-            if (timeOnPage === 60) trackEvent('TimeOnPage', { seconds: 60 });
-            if (timeOnPage === 180) trackEvent('TimeOnPage', { seconds: 180 });
-        }, 30000);
-        
-        // Active nav link
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-        
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                if (window.scrollY >= section.offsetTop - 100) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('text-neon');
-                link.classList.add('text-white/60');
-                if (link.getAttribute('data-section') === current) {
-                    link.classList.add('text-neon');
-                    link.classList.remove('text-white/60');
-                }
-            });
-        });
-        
-        // ==========================================
-        // TESTIMONIAL VIEW TRACKING
-        // ==========================================
-        const testimonialObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const card = entry.target;
-                    const testimonialName = card.dataset.testimonial;
-                    const testimonialIndex = card.dataset.index;
-                    
-                    trackEvent('TestimonialView', {
-                        testimonial_name: testimonialName,
-                        testimonial_index: testimonialIndex,
-                        source: 'testimonials_section'
-                    });
-                    
-                    testimonialObserver.unobserve(card);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        document.querySelectorAll('.testimonial-card').forEach(card => {
-            testimonialObserver.observe(card);
-        });
-        
-        // ==========================================
-        // GALLERY VIEW TRACKING (mejorado)
-        // ==========================================
-        const galleryObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const item = entry.target;
-                    const galleryItem = item.dataset.gallery;
-                    const galleryType = item.dataset.type;
-                    
-                    if (galleryItem) {
-                        trackEvent('GalleryView', {
-                            item: galleryItem,
-                            type: galleryType || 'image',
-                            view_method: 'scroll',
-                            source: 'gallery_section'
-                        });
-                    }
-                    
-                    galleryObserver.unobserve(item);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        document.querySelectorAll('[data-gallery]').forEach(item => {
-            galleryObserver.observe(item);
-        });
-        
-        // ==========================================
-        // FORM SUBMIT TRACKING
-        // ==========================================
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const formData = new FormData(contactForm);
-                const data = {
-                    nombre: formData.get('nombre'),
-                    email: formData.get('email'),
-                    telefono: formData.get('telefono'),
-                    tipo_evento: formData.get('tipo_evento'),
-                    servicio: formData.get('servicio'),
-                    fecha: formData.get('fecha'),
-                    mensaje: formData.get('mensaje')
-                };
-                
-                // Get segment from session if available
-                const userSegment = sessionStorage.getItem('user_segment') || data.tipo_evento;
-                const leadQuality = sessionStorage.getItem('lead_quality') || 'warm';
-                
-                // Show loading
-                const submitBtn = document.getElementById('submitBtn');
-                const btnText = document.getElementById('btnText');
-                const btnSpinner = document.getElementById('btnSpinner');
-                
-                btnText.textContent = 'Enviando...';
-                btnSpinner.classList.remove('hidden');
-                submitBtn.disabled = true;
-                
-                // Generate unique event_id for deduplication
-                const eventId = generateEventId();
-
-                // Preparar user_data para Facebook CAPI
-                const userData = {
-                    email: data.email,
-                    phone_number: data.telefono,
-                    first_name: data.nombre.split(' ')[0],
-                    last_name: data.nombre.split(' ').slice(1).join(' ') || data.nombre,
-                    external_id: eventId
-                };
-
-                // Capturar cookies _fbp y _fbc si existen
-                const fbp = getCookie('_fbp');
-                const fbc = getCookie('_fbc');
-                if (fbp) userData.fbp = fbp;
-                if (fbc) userData.fbc = fbc;
-
-                // Track FormSubmit event
-                trackEvent('FormSubmit', {
-                    form_name: 'contact_form',
-                    segment_type: userSegment,
-                    service_interest: data.servicio,
-                    lead_quality: leadQuality,
-                    has_date: data.fecha ? 'yes' : 'no',
-                    has_message: data.mensaje ? 'yes' : 'no',
-                    event_id: eventId
-                }, userData);
-
-                // Track as Lead (evento estándar de Meta)
-                trackEvent('Lead', {
-                    content_name: 'contact_form',
-                    content_category: userSegment,
-                    client_type: data.servicio,
-                    value: data.servicio === 'paquete_completo' ? 100 : 50,
-                    currency: 'ARS',
-                    event_id: eventId
-                }, userData);
-                
-                // Simular envío (reemplazar con tu endpoint real)
-                // Por ejemplo: Google Apps Script, HubSpot API, etc.
-                const webhookUrl = 'https://script.google.com/macros/s/TU_SCRIPT_ID/exec';
-                
-                fetch(webhookUrl, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                })
-                .then(() => {
-                    // Success
-                    btnText.textContent = '¡Enviado!';
-                    btnSpinner.classList.add('hidden');
-                    document.getElementById('formSuccess').classList.remove('hidden');
-                    contactForm.reset();
-
-                    // Track success (same event_id for deduplication)
-                    trackEvent('FormSubmitSuccess', {
-                        form_name: 'contact_form',
-                        segment_type: userSegment,
-                        event_id: eventId
-                    });
-
-                    // Reset button after 3s
-                    setTimeout(() => {
-                        btnText.textContent = 'Enviar Solicitud';
-                        submitBtn.disabled = false;
-                    }, 3000);
-                })
-                .catch((error) => {
-                    // Error
-                    btnText.textContent = 'Error';
-                    btnSpinner.classList.add('hidden');
-                    document.getElementById('formError').classList.remove('hidden');
-
-                    // Track error (same event_id for deduplication)
-                    trackEvent('FormSubmitError', {
-                        form_name: 'contact_form',
-                        error: error.message || 'unknown',
-                        event_id: eventId
-                    });
-
-                    // Reset button after 3s
-                    setTimeout(() => {
-                        btnText.textContent = 'Enviar Solicitud';
-                        submitBtn.disabled = false;
-                        document.getElementById('formError').classList.add('hidden');
-                    }, 3000);
-                });
-            });
+        if (text.includes('discoteca') || text.includes('boliche') || text.includes('noche')) {
+          btn.addEventListener('click', function() {
+            trackSegmentSelection('entretenimiento');
+          });
         }
+        
+        if (text.includes('municipalidad') || text.includes('cultura')) {
+          btn.addEventListener('click', function() {
+            trackSegmentSelection('institucional');
+          });
+        }
+        
+        if (text.includes('productor') || text.includes('empresa') || text.includes('corporativo') || text.includes('privado')) {
+          btn.addEventListener('click', function() {
+            trackSegmentSelection('corporativo');
+          });
+        }
+      });
+      
+      // ---- WHATSAPP ----
+      document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"]').forEach(function(link) {
+        link.addEventListener('click', function() {
+          trackWhatsAppClick();
+        });
+      });
+      
+      // ---- FORMULARIO (MODIFICADO PARA REDIRECT A GRACIAS) ----
+      var forms = document.querySelectorAll('form');
+      forms.forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+          
+          // 1. Evitar que se envíe "a la antigua"
+          e.preventDefault();
+          
+          // 2. Capturar datos y mandar al Pixel
+          var formData = {
+            name: form.querySelector('[name*="nombre"], [name*="name"]')?.value || '',
+            email: form.querySelector('[name*="email"], [name*="mail"]')?.value || '',
+            phone: form.querySelector('[name*="telefono"], [name*="phone"], [name*="whatsapp"], [name*="tel"]')?.value || '',
+            service: form.querySelector('select, [name*="servicio"], [name*="service"]')?.value || ''
+          };
+          
+          if (formData.email || formData.phone) {
+            trackLead(formData);
+          }
+
+          // 3. Enviar el formulario y LLEVAR A LA PÁGINA DE GRACIAS
+          // Usamos fetch para enviar los datos y luego hacemos el redirect
+          var datos = new FormData(form);
+          
+          fetch(form.action, {
+             method: form.method || 'POST',
+             body: datos
+          })
+          .then(function() {
+             // Si salió bien el envío, vamos a Gracias
+             window.location.href = 'https://laserman.com.ar/gracias';
+          })
+          .catch(function() {
+             // Si falló algo técnico, vamos a Gracias igual para no trabar al usuario
+             window.location.href = 'https://laserman.com.ar/gracias';
+          });
+          
+        });
+      });
+      
+      // ---- Mobile Menu Toggle ----
+      window.toggleMobileMenu = function() {
+        var menu = document.getElementById('mobileMenu');
+        if(menu) menu.classList.toggle('open');
+      };
+      
     });
+
+    // Exponer funciones globalmente
+    window.trackSegmentSelection = trackSegmentSelection;
+    window.trackWhatsAppClick = trackWhatsAppClick;
+    window.trackLead = trackLead;
     </script>
     <?php
 }
-add_action('wp_footer', 'dk_footer_scripts');
+add_action('wp_footer', 'laserman_tracking_2026');
 
 /**
  * Get WhatsApp URL
