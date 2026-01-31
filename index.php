@@ -183,14 +183,14 @@ $data = dk_get_site_data();
         <div class="mb-20 text-center">
             <span class="text-neon font-display text-[10px] tracking-[0.6em] block mb-4">QUÉ OFRECEMOS</span>
             <h2 class="text-4xl md:text-6xl font-display font-bold uppercase leading-tight">
-                5 Formas de Transformar<br>
+                4 Formas de Transformar<br>
                 <span class="text-neon font-light">tu Evento</span>
             </h2>
             <div class="h-[1px] w-20 bg-neon mt-8 mx-auto"></div>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-zinc-900 border border-zinc-900">
+        <div class="grid md:grid-cols-2 lg:grid-cols-6 gap-px bg-zinc-900 border border-zinc-900">
             <!-- SERVICIO 1: SHOW LASERMAN ⭐ -->
-            <div class="relative bg-dark lg:col-span-2 flex flex-col">
+            <div class="relative bg-dark lg:col-span-4 flex flex-col">
                 <div class="p-4 md:p-10 group hover:bg-zinc-900/30 transition-all">
                     <div class="absolute top-6 right-6 bg-neon text-black px-4 py-1 text-[9px] font-black tracking-widest z-10">
                         ⭐ MÁS PEDIDO
@@ -234,7 +234,7 @@ $data = dk_get_site_data();
             </div>
             
             <!-- SERVICIO 2: TÚNELES INMERSIVOS -->
-            <div class="relative bg-dark flex flex-col">
+            <div class="relative bg-dark lg:col-span-2 flex flex-col lg:justify-end">
                 <div class="p-4 md:p-10 group hover:bg-zinc-900/30 transition-all">
                     <div class="mb-6">
                         <img src="https://laserman.com.ar/wp-content/uploads/2026/01/b.jpg"
@@ -274,7 +274,7 @@ $data = dk_get_site_data();
             </div>
             
             <!-- SERVICIO 3: PROYECCIONES LÁSER -->
-            <div class="relative bg-dark flex flex-col">
+            <div class="relative bg-dark lg:col-span-3 flex flex-col">
                 <div class="p-4 md:p-10 group hover:bg-zinc-900/30 transition-all">
                     <div class="mb-6">
                         <img src="<?php echo esc_url($data['services'][2]['image']); ?>"
@@ -313,48 +313,8 @@ $data = dk_get_site_data();
                 </div>
             </div>
             
-            <!-- SERVICIO 4: SHOW LED -->
-            <div class="relative bg-dark flex flex-col">
-                <div class="p-4 md:p-10 group hover:bg-zinc-900/30 transition-all">
-                    <div class="mb-6">
-                        <img src="https://laserman.com.ar/wp-content/uploads/2025/12/Generated-Image-October-29-2025-8_45AM-e1765355240381.png"
-                             class="w-full aspect-video object-cover scroll-colorize"
-                             style="filter: grayscale(1);"
-                             alt="Show LED">
-                    </div>
-                    <h3 class="text-2xl font-display font-bold uppercase mb-2">Show de Robots LED</h3>
-                    <p class="text-xs text-zinc-500 uppercase tracking-widest mb-4">El clásico que nunca falla</p>
-                    <p class="text-sm text-zinc-300 leading-relaxed mb-6">
-                        15 años animando eventos. Desde fiestas privadas hasta festivales masivos. Apuesta segura.
-                    </p>
-                    <button onclick="toggleService('led')" class="inline-block text-neon text-xs uppercase tracking-widest hover:underline mb-4">
-                        MÁS INFO →
-                    </button>
-                </div>
-                <div id="service-led" class="service-expanded border-t border-zinc-900">
-                    <div class="p-4 md:p-10 bg-zinc-900/50">
-                        <h4 class="text-2xl font-display font-bold text-white mb-6">Galería Show LED</h4>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="row-span-2">
-                                <img src="https://laserman.com.ar/inicio/wp-content/uploads/2025/08/descarga-4-1-e1755670891680.jpeg" 
-                                     class="w-full h-full object-cover" alt="LED 1">
-                            </div>
-                            <img src="https://laserman.com.ar/inicio/wp-content/uploads/2025/08/descarga-4-1-e1755670891680.jpeg" 
-                                 class="w-full aspect-video object-cover" alt="LED 2">
-                            <img src="https://laserman.com.ar/inicio/wp-content/uploads/2025/08/descarga-4-1-e1755670891680.jpeg" 
-                                 class="w-full aspect-video object-cover" alt="LED 3">
-                            <img src="https://laserman.com.ar/inicio/wp-content/uploads/2025/08/descarga-4-1-e1755670891680.jpeg" 
-                                 class="w-full aspect-video object-cover col-span-2" alt="LED 4">
-                        </div>
-                        <a href="#contacto" class="mt-6 inline-block px-8 py-3 bg-neon text-black font-bold uppercase text-sm hover:bg-white transition">
-                            Cotizar Show LED
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- SERVICIO 5: PAQUETE COMPLETO -->
-            <div class="relative bg-dark flex flex-col">
+            <!-- SERVICIO 4: PAQUETE COMPLETO -->
+            <div class="relative bg-dark lg:col-span-3 flex flex-col">
                 <div class="p-4 md:p-10 group hover:bg-zinc-900/30 transition-all">
                     <div class="absolute top-6 right-6 bg-neon/20 text-neon border border-neon px-4 py-1 text-[9px] font-black tracking-widest z-10">
                         💰 MEJOR VALOR
