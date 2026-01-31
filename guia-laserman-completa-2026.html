@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía COMPLETA: Stape + Meta CAPI - laserman.com.ar 2026</title>
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --success: #34a853;
+            --warning: #fbbc04;
+            --danger: #ea4335;
+            --dark: #202124;
+            --light: #f8f9fa;
+            --meta-blue: #1877f2;
+            --stape-purple: #6c5ce7;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+        
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        header h1 { font-size: 2.2rem; margin-bottom: 10px; }
+        header p { font-size: 1.1rem; opacity: 0.9; }
+        
+        .config-box {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .config-box h2 { color: #00d9ff; margin-bottom: 20px; }
+        
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .config-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .config-item .label { font-size: 0.85rem; color: #aaa; margin-bottom: 5px; }
+        .config-item .value { font-family: monospace; font-size: 0.95rem; color: #00ff88; word-break: break-all; }
+        
+        .objective-box {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .objective-box h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .metric {
+            background: linear-gradient(135deg, #f5f7fa, #e4e8ec);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .metric .value { font-size: 1.8rem; font-weight: bold; color: var(--success); }
+        .metric .label { color: #666; font-size: 0.85rem; }
+        .metric.current .value { color: var(--warning); }
+        
+        .step-section {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .step-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .step-header:hover { background: #1557b0; }
+        .step-header.meta { background: var(--meta-blue); }
+        .step-header.meta:hover { background: #166fe5; }
+        .step-header.stape { background: var(--stape-purple); }
+        .step-header.stape:hover { background: #5b4cdb; }
+        .step-header.code { background: #2d3748; }
+        .step-header.code:hover { background: #1a202c; }
+        .step-header.test { background: var(--success); }
+        .step-header.test:hover { background: #2e7d32; }
+        
+        .step-header h3 { display: flex; align-items: center; gap: 15px; font-size: 1.1rem; }
+        
+        .step-number {
+            background: rgba(255,255,255,0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .step-time {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .step-content { padding: 25px; display: none; }
+        .step-content.active { display: block; }
+        
+        .substep {
+            background: #f8f9fa;
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .substep h4 { color: var(--primary); margin-bottom: 10px; }
+        
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 13px;
+            position: relative;
+        }
+        
+        .code-block .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .code-block .copy-btn:hover { background: #1557b0; }
+        .code-block code { white-space: pre-wrap; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
+        table th, table td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        table th { background: var(--primary); color: white; }
+        table tr:nth-child(even) { background: #f8f9fa; }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .checkbox-item:hover { background: #e8f0fe; }
+        .checkbox-item input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
+        .checkbox-item.checked { background: #e6f4ea; text-decoration: line-through; color: #666; }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid var(--warning);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid var(--success);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .danger-box {
+            background: #f8d7da;
+            border-left: 4px solid var(--danger);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .info-box {
+            background: #cce5ff;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover { background: #1557b0; }
+        
+        .expand-all { text-align: center; margin: 20px 0; }
+        
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 25px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar .fill {
+            background: linear-gradient(90deg, var(--success), #4caf50);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .event-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .event-badge.new { background: #e8f5e9; color: #2e7d32; }
+        .event-badge.critical { background: #ffebee; color: #c62828; }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            margin-top: 40px;
+        }
+        
+        @media print {
+            .step-content { display: block !important; }
+            .copy-btn, .expand-all { display: none; }
+            .step-section { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🚀 Guía COMPLETA desde CERO</h1>
+        <p>Stape + Meta CAPI | laserman.com.ar</p>
+        <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
+            Incluye: SegmentSelection + WhatsAppClick + Lead + Deduplicación 100%
+        </p>
+    </header>
+    
+    <div class="container">
+        
+        <!-- ============================================ -->
+        <!-- CONFIGURACIÓN -->
+        <!-- ============================================ -->
+        <div class="config-box">
+            <h2>⚙️ Tu Configuración</h2>
+            <div class="config-grid">
+                <div class="config-item">
+                    <div class="label">Pixel ID (Meta)</div>
+                    <div class="value">25699472449663830</div>
+                </div>
+                <div class="config-item">
+                    <div class="label">GTM Web</div>
+                    <div class="value">GTM-TNM9JZ3S</div>
+                </div>
+                <div class="config-item">
+                    <div class="label">GTM Server</div>
+                    <div class="value">GTM-T2ZQP7WV</div>
+                </div>
+                <div class="config-item">
+                    <div class="label">Dominio Stape</div>
+                    <div class="value">domine.laserman.com.ar</div>
+                </div>
+                <div class="config-item">
+                    <div class="label">WhatsApp</div>
+                    <div class="value">+54 9 2995 920418</div>
+                </div>
+                <div class="config-item">
+                    <div class="label">Dataset</div>
+                    <div class="value">LA FINAL SERA</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============================================ -->
+        <!-- MÉTRICAS OBJETIVO -->
+        <!-- ============================================ -->
+        <div class="objective-box">
+            <h2>📊 Métricas Objetivo</h2>
+            <div class="metrics">
+                <div class="metric current">
+                    <div class="value">6.1</div>
+                    <div class="label">EMQ Actual</div>
+                </div>
+                <div class="metric">
+                    <div class="value">8-10</div>
+                    <div class="label">EMQ Objetivo</div>
+                </div>
+                <div class="metric">
+                    <div class="value">75%+</div>
+                    <div class="label">Cobertura</div>
+                </div>
+                <div class="metric">
+                    <div class="value">100%</div>
+                    <div class="label">Deduplicación</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============================================ -->
+        <!-- EVENTOS A CONFIGURAR -->
+        <!-- ============================================ -->
+        <div class="objective-box">
+            <h2>🎯 Eventos a Configurar</h2>
+            <table>
+                <tr>
+                    <th>Evento</th>
+                    <th>Trigger</th>
+                    <th>Para qué sirve</th>
+                </tr>
+                <tr>
+                    <td><strong>PageView</strong></td>
+                    <td>Carga de página</td>
+                    <td>Base de todo el tracking</td>
+                </tr>
+                <tr>
+                    <td><strong>SegmentSelection</strong> <span class="event-badge new">NUEVO</span></td>
+                    <td>Click en 3 botones de público</td>
+                    <td>Segmentar audiencias por tipo de cliente</td>
+                </tr>
+                <tr>
+                    <td><strong>WhatsAppClick</strong> <span class="event-badge new">NUEVO</span></td>
+                    <td>Click en WhatsApp</td>
+                    <td>Medir intención de contacto</td>
+                </tr>
+                <tr>
+                    <td><strong>Lead</strong> <span class="event-badge critical">CONVERSIÓN</span></td>
+                    <td>Envío de formulario</td>
+                    <td>Conversión principal</td>
+                </tr>
+            </table>
+            
+            <h4 style="margin-top: 20px;">Botones de Segmento:</h4>
+            <table>
+                <tr>
+                    <th>Botón</th>
+                    <th>Valor segment</th>
+                </tr>
+                <tr>
+                    <td>⚡ DISCOTECA / BOLICHE</td>
+                    <td><code>entretenimiento</code></td>
+                </tr>
+                <tr>
+                    <td>🏛️ MUNICIPALIDAD / CULTURA</td>
+                    <td><code>institucional</code></td>
+                </tr>
+                <tr>
+                    <td>💼 PRODUCTOR / EMPRESA</td>
+                    <td><code>corporativo</code></td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- ============================================ -->
+        <!-- PROGRESO -->
+        <!-- ============================================ -->
+        <div class="objective-box">
+            <h2>✅ Tu Progreso</h2>
+            <div class="progress-bar">
+                <div class="fill" id="progressFill">0%</div>
+            </div>
+            <p id="progressText">Completá los pasos marcando las casillas</p>
+        </div>
+        
+        <div class="expand-all">
+            <button class="btn" onclick="toggleAllSteps()">📖 Expandir/Colapsar Todo</button>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PASO 1: GTM WEB - VARIABLES -->
+        <!-- ============================================ -->
+        <div class="step-section" id="step1">
+            <div class="step-header" onclick="toggleStep(1)">
+                <h3><span class="step-number">1</span> GTM Web - Variables</h3>
+                <span class="step-time">⏱️ 15 min</span>
+            </div>
+            <div class="step-content" id="step1-content">
+                
+                <div class="info-box">
+                    <strong>📍 Ubicación:</strong> <a href="https://tagmanager.google.com" target="_blank">tagmanager.google.com</a> → Contenedor <strong>GTM-TNM9JZ3S</strong> (Web)
+                </div>
+                
+                <div class="substep">
+                    <h4>1.1 Activar Variables Integradas</h4>
+                    <ol>
+                        <li>Click en <strong>"Variables"</strong> (menú izquierdo)</li>
+                        <li>Click en <strong>"Configurar"</strong> (botón arriba derecha)</li>
+                        <li>Tildar TODAS estas:</li>
+                    </ol>
+                    <table>
+                        <tr><th>Categoría</th><th>Variables</th></tr>
+                        <tr><td>Páginas</td><td>☑️ Page URL, ☑️ Page Hostname, ☑️ Page Path, ☑️ Referrer</td></tr>
+                        <tr><td>Clics</td><td>☑️ Click Element, ☑️ Click Classes, ☑️ Click ID, ☑️ Click URL, ☑️ Click Text</td></tr>
+                        <tr><td>Formularios</td><td>☑️ Form Element, ☑️ Form Classes, ☑️ Form ID</td></tr>
+                        <tr><td>Utilidades</td><td>☑️ Container ID, ☑️ Debug Mode, ☑️ Random Number</td></tr>
+                    </table>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Variables integradas activadas</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>1.2 Variable: cjs - Event ID <span class="event-badge critical">CRÍTICA</span></h4>
+                    <p>Esta variable genera un ID único para cada evento - <strong>es la clave de la deduplicación</strong>.</p>
+                    <ol>
+                        <li><strong>Variables → Variables definidas por el usuario → Nueva</strong></li>
+                        <li><strong>Configuración de variable → JavaScript personalizado</strong></li>
+                        <li>Pegar este código:</li>
+                    </ol>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                        <code>function() {
+  var eventName = {{Event}} || 'event';
+  var timestamp = Date.now();
+  var random = Math.random().toString(36).substring(2, 11);
+  return 'laserman_' + eventName + '_' + timestamp + '_' + random;
+}</code>
+                    </div>
+                    <ol start="4">
+                        <li>Nombre: <code><strong>cjs - Event ID</strong></code></li>
+                        <li>Click <strong>"Guardar"</strong></li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Variable "cjs - Event ID" creada</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>1.3 Variable: cookie - fbp</h4>
+                    <ol>
+                        <li><strong>Variables → Nueva</strong></li>
+                        <li><strong>Configuración → Cookie de origen (1st Party Cookie)</strong></li>
+                        <li>Cookie Name: <code>_fbp</code></li>
+                        <li>Nombre: <code><strong>cookie - fbp</strong></code></li>
+                        <li>Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Variable "cookie - fbp" creada</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>1.4 Variable: cookie - fbc</h4>
+                    <ol>
+                        <li><strong>Variables → Nueva</strong></li>
+                        <li><strong>Configuración → Cookie de origen (1st Party Cookie)</strong></li>
+                        <li>Cookie Name: <code>_fbc</code></li>
+                        <li>Nombre: <code><strong>cookie - fbc</strong></code></li>
+                        <li>Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Variable "cookie - fbc" creada</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>1.5 Variables de Capa de Datos (DataLayer)</h4>
+                    <p>Crear <strong>5 variables</strong> tipo "Variable de capa de datos":</p>
+                    <table>
+                        <tr><th>Nombre Variable</th><th>Nombre de variable de capa de datos</th></tr>
+                        <tr><td><code>dlv - user email</code></td><td><code>user_data.email</code></td></tr>
+                        <tr><td><code>dlv - user phone</code></td><td><code>user_data.phone</code></td></tr>
+                        <tr><td><code>dlv - user name</code></td><td><code>user_data.first_name</code></td></tr>
+                        <tr><td><code>dlv - segment</code></td><td><code>segment</code></td></tr>
+                        <tr><td><code>dlv - service</code></td><td><code>service</code></td></tr>
+                    </table>
+                    <p><strong>Para cada una:</strong></p>
+                    <ol>
+                        <li>Variables → Nueva</li>
+                        <li>Configuración → <strong>Variable de capa de datos</strong></li>
+                        <li>Nombre de variable de capa de datos: [copiar de la tabla]</li>
+                        <li>Nombre: [copiar de la tabla]</li>
+                        <li>Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> 5 Variables DataLayer creadas</label>
+                </div>
+                
+                <div class="success-box">
+                    <strong>✅ Variables GTM Web completadas:</strong> cjs - Event ID, cookie - fbp, cookie - fbc, dlv - user email, dlv - user phone, dlv - user name, dlv - segment, dlv - service
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PASO 2: GTM WEB - TRIGGERS -->
+        <!-- ============================================ -->
+        <div class="step-section" id="step2">
+            <div class="step-header" onclick="toggleStep(2)">
+                <h3><span class="step-number">2</span> GTM Web - Triggers (Activadores)</h3>
+                <span class="step-time">⏱️ 10 min</span>
+            </div>
+            <div class="step-content" id="step2-content">
+                
+                <div class="substep">
+                    <h4>2.1 Trigger: CE - SegmentSelection <span class="event-badge new">NUEVO</span></h4>
+                    <ol>
+                        <li><strong>Activadores → Nuevo</strong></li>
+                        <li><strong>Configuración → Evento personalizado</strong></li>
+                        <li>Nombre del evento: <code>SegmentSelection</code></li>
+                        <li>Nombre: <code><strong>CE - SegmentSelection</strong></code></li>
+                        <li>Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Trigger "CE - SegmentSelection" creado</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>2.2 Trigger: Click - WhatsApp <span class="event-badge new">NUEVO</span></h4>
+                    <ol>
+                        <li><strong>Activadores → Nuevo</strong></li>
+                        <li><strong>Configuración → Clic - Solo enlaces</strong></li>
+                        <li>Este activador se activa en: <strong>Algunos clics en enlaces</strong></li>
+                        <li>Condición: <code>Click URL</code> - <strong>contiene</strong> - <code>wa.me</code></li>
+                        <li>Nombre: <code><strong>Click - WhatsApp</strong></code></li>
+                        <li>Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Trigger "Click - WhatsApp" creado</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>2.3 Trigger: CE - Lead</h4>
+                    <ol>
+                        <li><strong>Activadores → Nuevo</strong></li>
+                        <li><strong>Configuración → Evento personalizado</strong></li>
+                        <li>Nombre del evento: <code>Lead</code></li>
+                        <li>Nombre: <code><strong>CE - Lead</strong></code></li>
+                        <li>Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Trigger "CE - Lead" creado</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PASO 3: GTM WEB - TAGS META PIXEL -->
+        <!-- ============================================ -->
+        <div class="step-section" id="step3">
+            <div class="step-header meta" onclick="toggleStep(3)">
+                <h3><span class="step-number">3</span> GTM Web - Tags Meta Pixel (Browser)</h3>
+                <span class="step-time">⏱️ 25 min</span>
+            </div>
+            <div class="step-content" id="step3-content">
+                
+                <div class="substep">
+                    <h4>3.1 Tag: Meta Pixel - Init</h4>
+                    <ol>
+                        <li><strong>Tags → Nueva</strong></li>
+                        <li><strong>Configuración de etiqueta → HTML personalizado</strong></li>
+                        <li>Pegar este código:</li>
+                    </ol>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                        <code>&lt;script&gt;
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '25699472449663830');
+&lt;/script&gt;</code>
+                    </div>
+                    <ol start="4">
+                        <li><strong>Activación → All Pages</strong></li>
+                        <li>Nombre: <code><strong>Meta Pixel - Init</strong></code></li>
+                        <li>Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Tag "Meta Pixel - Init" creado</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>3.2 Tag: Meta Pixel - PageView</h4>
+                    <ol>
+                        <li><strong>Tags → Nueva → HTML personalizado</strong></li>
+                        <li>Código:</li>
+                    </ol>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                        <code>&lt;script&gt;
+fbq('track', 'PageView', {}, {eventID: '{{cjs - Event ID}}'});
+&lt;/script&gt;</code>
+                    </div>
+                    <ol start="3">
+                        <li><strong>Activación → All Pages</strong></li>
+                        <li><strong>Configuración avanzada → Secuenciación de etiquetas:</strong>
+                            <ul>
+                                <li>☑️ Activar una etiqueta antes de que se active esta</li>
+                                <li>Etiqueta de configuración: <strong>Meta Pixel - Init</strong></li>
+                            </ul>
+                        </li>
+                        <li>Nombre: <code><strong>Meta Pixel - PageView</strong></code></li>
+                        <li>Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Tag "Meta Pixel - PageView" creado</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>3.3 Tag: Meta Pixel - SegmentSelection <span class="event-badge new">NUEVO</span></h4>
+                    <ol>
+                        <li><strong>Tags → Nueva → HTML personalizado</strong></li>
+                        <li>Código:</li>
+                    </ol>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                        <code>&lt;script&gt;
+fbq('trackCustom', 'SegmentSelection', {
+  segment: '{{dlv - segment}}',
+  content_name: 'Tipo de Cliente'
+}, {eventID: '{{cjs - Event ID}}'});
+&lt;/script&gt;</code>
+                    </div>
+                    <ol start="3">
+                        <li><strong>Activación → CE - SegmentSelection</strong></li>
+                        <li><strong>Secuenciación:</strong> Meta Pixel - Init antes</li>
+                        <li>Nombre: <code><strong>Meta Pixel - SegmentSelection</strong></code></li>
+                        <li>Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Tag "Meta Pixel - SegmentSelection" creado</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>3.4 Tag: Meta Pixel - WhatsAppClick <span class="event-badge new">NUEVO</span></h4>
+                    <ol>
+                        <li><strong>Tags → Nueva → HTML personalizado</strong></li>
+                        <li>Código:</li>
+                    </ol>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                        <code>&lt;script&gt;
+fbq('track', 'Contact', {
+  content_name: 'WhatsApp Click',
+  content_category: 'Contact'
+}, {eventID: '{{cjs - Event ID}}'});
+&lt;/script&gt;</code>
+                    </div>
+                    <ol start="3">
+                        <li><strong>Activación → Click - WhatsApp</strong></li>
+                        <li><strong>Secuenciación:</strong> Meta Pixel - Init antes</li>
+                        <li>Nombre: <code><strong>Meta Pixel - WhatsAppClick</strong></code></li>
+                        <li>Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Tag "Meta Pixel - WhatsAppClick" creado</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>3.5 Tag: Meta Pixel - Lead <span class="event-badge critical">CONVERSIÓN</span></h4>
+                    <ol>
+                        <li><strong>Tags → Nueva → HTML personalizado</strong></li>
+                        <li>Código:</li>
+                    </ol>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                        <code>&lt;script&gt;
+fbq('track', 'Lead', {
+  content_name: 'Formulario Contacto',
+  content_category: '{{dlv - service}}'
+}, {eventID: '{{cjs - Event ID}}'});
+&lt;/script&gt;</code>
+                    </div>
+                    <ol start="3">
+                        <li><strong>Activación → CE - Lead</strong></li>
+                        <li><strong>Secuenciación:</strong> Meta Pixel - Init antes</li>
+                        <li>Nombre: <code><strong>Meta Pixel - Lead</strong></code></li>
+                        <li>Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Tag "Meta Pixel - Lead" creado</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PASO 4: GTM WEB - TAG GA4 -->
+        <!-- ============================================ -->
+        <div class="step-section" id="step4">
+            <div class="step-header" onclick="toggleStep(4)">
+                <h3><span class="step-number">4</span> GTM Web - Tag GA4 (Conexión al Server)</h3>
+                <span class="step-time">⏱️ 10 min</span>
+            </div>
+            <div class="step-content" id="step4-content">
+                
+                <div class="danger-box">
+                    <strong>🚨 CRÍTICO:</strong> Este tag conecta GTM Web con GTM Server. Sin esto, no hay datos en el servidor.
+                </div>
+                
+                <div class="substep">
+                    <h4>4.1 Tag: GA4 - Config</h4>
+                    <ol>
+                        <li><strong>Tags → Nueva</strong></li>
+                        <li><strong>Configuración → Google Tag</strong></li>
+                        <li>Tag ID: <code>G-XXXXXXXXXX</code> (tu ID de GA4, si no tenés uno, crealo en analytics.google.com)</li>
+                        <li><strong>Parámetros de configuración → Añadir fila:</strong>
+                            <table>
+                                <tr><th>Nombre</th><th>Valor</th></tr>
+                                <tr><td><code>server_container_url</code></td><td><code>https://domine.laserman.com.ar</code></td></tr>
+                            </table>
+                        </li>
+                        <li><strong>Activación → All Pages</strong></li>
+                        <li>Nombre: <code><strong>GA4 - Config</strong></code></li>
+                        <li>Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Tag "GA4 - Config" creado con server_container_url</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>4.2 PUBLICAR GTM Web</h4>
+                    <ol>
+                        <li>Click <strong>"Enviar"</strong> (botón arriba derecha)</li>
+                        <li>Nombre de versión: <code>Meta Pixel + Server Connection - Completo</code></li>
+                        <li>Click <strong>"Publicar"</strong></li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> GTM Web PUBLICADO</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PASO 5: GTM SERVER - VARIABLES -->
+        <!-- ============================================ -->
+        <div class="step-section" id="step5">
+            <div class="step-header stape" onclick="toggleStep(5)">
+                <h3><span class="step-number">5</span> GTM Server - Variables Event Data</h3>
+                <span class="step-time">⏱️ 20 min</span>
+            </div>
+            <div class="step-content" id="step5-content">
+                
+                <div class="info-box">
+                    <strong>📍 Ubicación:</strong> <a href="https://tagmanager.google.com" target="_blank">tagmanager.google.com</a> → Contenedor <strong>GTM-T2ZQP7WV</strong> (Server)
+                </div>
+                
+                <div class="substep">
+                    <h4>5.1 Verificar Client GA4</h4>
+                    <ol>
+                        <li>En GTM Server → <strong>Clients</strong></li>
+                        <li>Verificar que existe <strong>"GA4"</strong></li>
+                        <li>Si NO existe: Nueva → GA4 → Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Client GA4 verificado/creado</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>5.2 Crear 12 Variables Event Data</h4>
+                    <p>Crear todas estas variables tipo <strong>"Event Data"</strong>:</p>
+                    <table>
+                        <tr><th>#</th><th>Nombre Variable</th><th>Event Data Key</th></tr>
+                        <tr><td>1</td><td><code>ed - event_id</code></td><td><code>event_id</code></td></tr>
+                        <tr><td>2</td><td><code>ed - event_name</code></td><td><code>event_name</code></td></tr>
+                        <tr><td>3</td><td><code>ed - email</code></td><td><code>user_data.email</code></td></tr>
+                        <tr><td>4</td><td><code>ed - phone</code></td><td><code>user_data.phone_number</code></td></tr>
+                        <tr><td>5</td><td><code>ed - first_name</code></td><td><code>user_data.first_name</code></td></tr>
+                        <tr><td>6</td><td><code>ed - last_name</code></td><td><code>user_data.last_name</code></td></tr>
+                        <tr><td>7</td><td><code>ed - fbp</code></td><td><code>x-fb-ck-fbp</code></td></tr>
+                        <tr><td>8</td><td><code>ed - fbc</code></td><td><code>x-fb-ck-fbc</code></td></tr>
+                        <tr><td>9</td><td><code>ed - ip</code></td><td><code>ip_override</code></td></tr>
+                        <tr><td>10</td><td><code>ed - user_agent</code></td><td><code>user_agent</code></td></tr>
+                        <tr><td>11</td><td><code>ed - segment</code></td><td><code>segment</code></td></tr>
+                        <tr><td>12</td><td><code>ed - service</code></td><td><code>service</code></td></tr>
+                    </table>
+                    <p><strong>Para CADA variable:</strong></p>
+                    <ol>
+                        <li>Variables → Variables definidas por el usuario → <strong>Nueva</strong></li>
+                        <li>Configuración → <strong>Event Data</strong></li>
+                        <li>Event Data Key: [copiar de la tabla]</li>
+                        <li>Nombre: [copiar de la tabla]</li>
+                        <li>Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> 12 Variables Event Data creadas</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PASO 6: ACCESS TOKEN META -->
+        <!-- ============================================ -->
+        <div class="step-section" id="step6">
+            <div class="step-header meta" onclick="toggleStep(6)">
+                <h3><span class="step-number">6</span> Generar Access Token de Meta</h3>
+                <span class="step-time">⏱️ 5 min</span>
+            </div>
+            <div class="step-content" id="step6-content">
+                
+                <div class="substep">
+                    <h4>6.1 Obtener Access Token</h4>
+                    <ol>
+                        <li>Ir a: <a href="https://business.facebook.com/events_manager2" target="_blank"><strong>Meta Events Manager</strong></a></li>
+                        <li>Seleccionar Dataset: <strong>LA FINAL SERA</strong> (25699472449663830)</li>
+                        <li>Click en <strong>"Configuración"</strong> (menú superior)</li>
+                        <li>Scroll hasta <strong>"API de conversiones"</strong></li>
+                        <li>Click <strong>"Generar token de acceso"</strong></li>
+                        <li>Validez: <strong>60 días</strong> (máximo)</li>
+                        <li><strong>Copiar el token</strong> (es muy largo, tipo <code>EAAxxxxxxx...</code>)</li>
+                    </ol>
+                    <div class="warning-box">
+                        <strong>⚠️ IMPORTANTE:</strong> Este token expira cada 60 días. Anotá en tu calendario para renovarlo.
+                    </div>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Access Token generado y copiado</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PASO 7: GTM SERVER - TAG META CAPI -->
+        <!-- ============================================ -->
+        <div class="step-section" id="step7">
+            <div class="step-header stape" onclick="toggleStep(7)">
+                <h3><span class="step-number">7</span> GTM Server - Tag Meta CAPI</h3>
+                <span class="step-time">⏱️ 20 min</span>
+            </div>
+            <div class="step-content" id="step7-content">
+                
+                <div class="substep">
+                    <h4>7.1 Instalar Template (si no existe)</h4>
+                    <ol>
+                        <li>GTM Server → <strong>Templates</strong></li>
+                        <li>Click <strong>"Buscar en la galería"</strong></li>
+                        <li>Buscar: <code>Facebook Conversions API</code></li>
+                        <li>Seleccionar el oficial</li>
+                        <li>Click <strong>"Añadir al espacio de trabajo"</strong></li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Template Facebook CAPI instalado</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>7.2 Tag: Meta CAPI - All Events ⭐</h4>
+                    <ol>
+                        <li><strong>Tags → Nueva</strong></li>
+                        <li><strong>Configuración → Facebook Conversions API</strong></li>
+                    </ol>
+                    
+                    <h5>API Settings:</h5>
+                    <table>
+                        <tr><th>Campo</th><th>Valor</th></tr>
+                        <tr><td>Pixel ID</td><td><code>25699472449663830</code></td></tr>
+                        <tr><td>API Access Token</td><td>[Pegar tu token del paso 6]</td></tr>
+                        <tr><td>Test Event Code</td><td>(dejar vacío en producción)</td></tr>
+                    </table>
+                    
+                    <h5>Event Settings:</h5>
+                    <table>
+                        <tr><th>Campo</th><th>Valor</th></tr>
+                        <tr><td>Action Source</td><td><code>website</code></td></tr>
+                    </table>
+                    
+                    <h5>Server Event Data Override (⭐ CRÍTICO para deduplicación):</h5>
+                    <p>Click <strong>"Añadir fila"</strong>:</p>
+                    <table>
+                        <tr><th>Property Name</th><th>Property Value</th></tr>
+                        <tr><td><code>event_id</code></td><td><code>{{ed - event_id}}</code></td></tr>
+                    </table>
+                    
+                    <h5>User Data (llenar TODO para EMQ alto):</h5>
+                    <table>
+                        <tr><th>Campo</th><th>Variable</th></tr>
+                        <tr><td>Email</td><td><code>{{ed - email}}</code></td></tr>
+                        <tr><td>Phone</td><td><code>{{ed - phone}}</code></td></tr>
+                        <tr><td>First Name</td><td><code>{{ed - first_name}}</code></td></tr>
+                        <tr><td>Last Name</td><td><code>{{ed - last_name}}</code></td></tr>
+                        <tr><td>Client IP Address</td><td><code>{{ed - ip}}</code></td></tr>
+                        <tr><td>Client User Agent</td><td><code>{{ed - user_agent}}</code></td></tr>
+                        <tr><td>Facebook Browser ID (fbp)</td><td><code>{{ed - fbp}}</code></td></tr>
+                        <tr><td>Facebook Click ID (fbc)</td><td><code>{{ed - fbc}}</code></td></tr>
+                    </table>
+                    
+                    <h5>Otras configuraciones:</h5>
+                    <ul>
+                        <li>Consent: <strong>Always send data</strong></li>
+                        <li>Logs: <strong>Log to console during debug and preview</strong></li>
+                    </ul>
+                    
+                    <ol start="3">
+                        <li><strong>Activación:</strong> Crear trigger → Custom → All Events</li>
+                        <li>Nombre: <code><strong>Meta CAPI - All Events</strong></code></li>
+                        <li>Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Tag "Meta CAPI - All Events" creado</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>7.3 Crear Trigger: All Events</h4>
+                    <ol>
+                        <li><strong>Activadores → Nuevo</strong></li>
+                        <li><strong>Configuración → Custom</strong></li>
+                        <li>Este activador se activa en: <strong>Todos los eventos</strong></li>
+                        <li>Nombre: <code><strong>All Events</strong></code></li>
+                        <li>Guardar</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Trigger "All Events" creado</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>7.4 PUBLICAR GTM Server</h4>
+                    <ol>
+                        <li>Click <strong>"Enviar"</strong></li>
+                        <li>Nombre de versión: <code>Meta CAPI - Configuración Completa</code></li>
+                        <li>Click <strong>"Publicar"</strong></li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> GTM Server PUBLICADO</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PASO 8: CÓDIGO WORDPRESS -->
+        <!-- ============================================ -->
+        <div class="step-section" id="step8">
+            <div class="step-header code" onclick="toggleStep(8)">
+                <h3><span class="step-number">8</span> Código WordPress - Eventos del Embudo</h3>
+                <span class="step-time">⏱️ 20 min</span>
+            </div>
+            <div class="step-content" id="step8-content">
+                
+                <div class="info-box">
+                    <strong>📍 Ubicación:</strong> WordPress → Apariencia → Editor de archivos del tema → functions.php<br>
+                    O usar plugin: <strong>Code Snippets</strong>
+                </div>
+                
+                <div class="substep">
+                    <h4>8.1 Código completo de tracking</h4>
+                    <p>Agregar este código en <strong>functions.php</strong>:</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                        <code>&lt;?php
+// =============================================
+// TRACKING LASERMAN 2026 - STAPE + META CAPI
+// Pixel ID: 25699472449663830
+// =============================================
+
+add_action('wp_footer', 'laserman_tracking_2026');
+function laserman_tracking_2026() {
+?&gt;
+&lt;script&gt;
+// =============================================
+// FUNCIONES AUXILIARES
+// =============================================
+
+function getCookie(name) {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
+  return '';
+}
+
+function generateEventId(eventName) {
+  return 'laserman_' + eventName + '_' + Date.now() + '_' + Math.random().toString(36).substr(2,9);
+}
+
+// =============================================
+// 1. SEGMENT SELECTION - 3 Botones de público
+// =============================================
+
+function trackSegmentSelection(segment) {
+  var eventId = generateEventId('SegmentSelection');
+  
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    'event': 'SegmentSelection',
+    'event_id': eventId,
+    'segment': segment
+  });
+  
+  console.log('SegmentSelection:', segment, eventId);
+}
+
+// =============================================
+// 2. WHATSAPP CLICK
+// =============================================
+
+function trackWhatsAppClick() {
+  var eventId = generateEventId('Contact');
+  
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    'event': 'WhatsAppClick',
+    'event_id': eventId,
+    'method': 'whatsapp'
+  });
+  
+  console.log('WhatsAppClick:', eventId);
+}
+
+// =============================================
+// 3. LEAD - Formulario de contacto
+// =============================================
+
+function trackLead(formData) {
+  var eventId = generateEventId('Lead');
+  
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    'event': 'Lead',
+    'event_id': eventId,
+    'user_data': {
+      'email': formData.email || '',
+      'phone': formData.phone || '',
+      'first_name': formData.name || '',
+      'fbp': getCookie('_fbp'),
+      'fbc': getCookie('_fbc')
+    },
+    'service': formData.service || ''
+  });
+  
+  console.log('Lead:', eventId, formData);
+}
+
+// =============================================
+// LISTENERS AUTOMÁTICOS
+// =============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // ---- BOTONES DE SEGMENTO ----
+  // Discoteca/Boliche
+  document.querySelectorAll('a[href*="#contacto"]').forEach(function(btn) {
+    var text = btn.textContent.toLowerCase();
+    
+    if (text.includes('discoteca') || text.includes('boliche') || text.includes('noche')) {
+      btn.addEventListener('click', function() {
+        trackSegmentSelection('entretenimiento');
+      });
+    }
+    
+    if (text.includes('municipalidad') || text.includes('cultura')) {
+      btn.addEventListener('click', function() {
+        trackSegmentSelection('institucional');
+      });
+    }
+    
+    if (text.includes('productor') || text.includes('empresa') || text.includes('corporativo') || text.includes('privado')) {
+      btn.addEventListener('click', function() {
+        trackSegmentSelection('corporativo');
+      });
+    }
+  });
+  
+  // ---- WHATSAPP ----
+  document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      trackWhatsAppClick();
+    });
+  });
+  
+  // ---- FORMULARIO ----
+  var forms = document.querySelectorAll('form');
+  forms.forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+      var formData = {
+        name: form.querySelector('[name*="nombre"], [name*="name"]')?.value || '',
+        email: form.querySelector('[name*="email"], [name*="mail"]')?.value || '',
+        phone: form.querySelector('[name*="telefono"], [name*="phone"], [name*="whatsapp"], [name*="tel"]')?.value || '',
+        service: form.querySelector('select, [name*="servicio"], [name*="service"]')?.value || ''
+      };
+      
+      if (formData.email || formData.phone) {
+        trackLead(formData);
+      }
+    });
+  });
+  
+});
+
+// Exponer funciones globalmente
+window.trackSegmentSelection = trackSegmentSelection;
+window.trackWhatsAppClick = trackWhatsAppClick;
+window.trackLead = trackLead;
+&lt;/script&gt;
+&lt;?php
+}
+</code>
+                    </div>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Código tracking agregado a WordPress</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>8.2 Agregar onclick a los botones (Opcional - más preciso)</h4>
+                    <p>Si querés control total, agregá estos atributos a tus botones:</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                        <code>&lt;!-- Botón Discoteca/Boliche --&gt;
+&lt;a href="#contacto" onclick="trackSegmentSelection('entretenimiento')"&gt;
+  ⚡ DISCOTECA / BOLICHE
+&lt;/a&gt;
+
+&lt;!-- Botón Municipalidad/Cultura --&gt;
+&lt;a href="#contacto" onclick="trackSegmentSelection('institucional')"&gt;
+  🏛️ MUNICIPALIDAD / CULTURA
+&lt;/a&gt;
+
+&lt;!-- Botón Productor/Empresa --&gt;
+&lt;a href="#contacto" onclick="trackSegmentSelection('corporativo')"&gt;
+  💼 PRODUCTOR / EMPRESA
+&lt;/a&gt;
+
+&lt;!-- Botón WhatsApp --&gt;
+&lt;a href="https://wa.me/5492995920418" onclick="trackWhatsAppClick()"&gt;
+  💬 WhatsApp
+&lt;/a&gt;</code>
+                    </div>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Onclick agregados a botones (opcional)</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PASO 9: TESTING -->
+        <!-- ============================================ -->
+        <div class="step-section" id="step9">
+            <div class="step-header test" onclick="toggleStep(9)">
+                <h3><span class="step-number">9</span> Testing y Verificación</h3>
+                <span class="step-time">⏱️ 15 min</span>
+            </div>
+            <div class="step-content" id="step9-content">
+                
+                <div class="substep">
+                    <h4>9.1 Abrir Meta Test Events</h4>
+                    <ol>
+                        <li>Ir a: <a href="https://business.facebook.com/events_manager2" target="_blank"><strong>Meta Events Manager</strong></a></li>
+                        <li>Seleccionar: <strong>LA FINAL SERA</strong> (25699472449663830)</li>
+                        <li>Click en <strong>"Probar eventos"</strong></li>
+                        <li>Dejar esta ventana abierta</li>
+                    </ol>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Meta Test Events abierto</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>9.2 Probar cada evento</h4>
+                    <p>Abrir <strong>ventana incógnito</strong> → Ir a <code>https://laserman.com.ar</code></p>
+                    
+                    <table>
+                        <tr>
+                            <th>Acción</th>
+                            <th>Evento esperado</th>
+                            <th>Verificar</th>
+                        </tr>
+                        <tr>
+                            <td>Cargar página</td>
+                            <td>PageView</td>
+                            <td>🟢 Browser + 🔵 Server con mismo event_id</td>
+                        </tr>
+                        <tr>
+                            <td>Click en "DISCOTECA/BOLICHE"</td>
+                            <td>SegmentSelection</td>
+                            <td>segment = "entretenimiento"</td>
+                        </tr>
+                        <tr>
+                            <td>Click en "MUNICIPALIDAD/CULTURA"</td>
+                            <td>SegmentSelection</td>
+                            <td>segment = "institucional"</td>
+                        </tr>
+                        <tr>
+                            <td>Click en "PRODUCTOR/EMPRESA"</td>
+                            <td>SegmentSelection</td>
+                            <td>segment = "corporativo"</td>
+                        </tr>
+                        <tr>
+                            <td>Click en WhatsApp</td>
+                            <td>Contact</td>
+                            <td>content_name = "WhatsApp Click"</td>
+                        </tr>
+                        <tr>
+                            <td>Enviar formulario</td>
+                            <td>Lead</td>
+                            <td>User Data visible (email, phone, fbp, fbc)</td>
+                        </tr>
+                    </table>
+                    
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> PageView verificado</label>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> SegmentSelection verificado</label>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> WhatsAppClick verificado</label>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Lead verificado con User Data</label>
+                </div>
+                
+                <div class="substep">
+                    <h4>9.3 Verificar deduplicación</h4>
+                    <p>Para cada evento deberías ver:</p>
+                    <ul>
+                        <li>🟢 <strong>Evento verde (Browser)</strong> con eventID: <code>laserman_xxx_123...</code></li>
+                        <li>🔵 <strong>Evento azul (Server)</strong> con event_id: <code>laserman_xxx_123...</code> (EL MISMO)</li>
+                    </ul>
+                    <div class="success-box">
+                        <strong>✅ Si ambos tienen el MISMO event_id = Deduplicación funcionando correctamente</strong>
+                    </div>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Deduplicación verificada</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PASO 10: VERIFICACIÓN 24-48HS -->
+        <!-- ============================================ -->
+        <div class="step-section" id="step10">
+            <div class="step-header test" onclick="toggleStep(10)">
+                <h3><span class="step-number">10</span> Verificación Final (24-48 horas)</h3>
+                <span class="step-time">⏱️ Esperar</span>
+            </div>
+            <div class="step-content" id="step10-content">
+                
+                <div class="warning-box">
+                    <strong>⏰ Esperar 24-48 horas</strong> para que Meta procese los datos y actualice las métricas.
+                </div>
+                
+                <div class="substep">
+                    <h4>10.1 Verificar métricas en Meta Events Manager</h4>
+                    <table>
+                        <tr><th>Métrica</th><th>Antes</th><th>Después (esperado)</th></tr>
+                        <tr><td>Event Match Quality (EMQ)</td><td>6.1/10</td><td><strong>8-10/10</strong> 🟢</td></tr>
+                        <tr><td>Cobertura de eventos</td><td>No disponible</td><td><strong>75%+</strong> 🟢</td></tr>
+                        <tr><td>Deduplicación</td><td>No disponible</td><td><strong>Activa</strong> 🟢</td></tr>
+                        <tr><td>Actualización de datos</td><td>No disponible</td><td><strong>Activa</strong> 🟢</td></tr>
+                    </table>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> EMQ en verde (8-10)</label>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Cobertura 75%+</label>
+                    <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Deduplicación activa</label>
+                </div>
+                
+                <div class="success-box">
+                    <h4>🎉 ¡IMPLEMENTACIÓN COMPLETA!</h4>
+                    <p>Ahora podés crear audiencias en Meta:</p>
+                    <ul>
+                        <li>✅ Usuarios que se identificaron como "Discoteca" (entretenimiento)</li>
+                        <li>✅ Usuarios que se identificaron como "Municipalidad" (institucional)</li>
+                        <li>✅ Usuarios que se identificaron como "Empresa" (corporativo)</li>
+                        <li>✅ Usuarios que clickearon WhatsApp</li>
+                        <li>✅ Usuarios que enviaron formulario (Leads)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- CHECKLIST FINAL -->
+        <!-- ============================================ -->
+        <div class="objective-box">
+            <h2>📋 Checklist Final</h2>
+            
+            <h4>GTM Web (GTM-TNM9JZ3S):</h4>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Variables integradas activadas</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> cjs - Event ID</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> cookie - fbp / cookie - fbc</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> 5 Variables DataLayer</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> 3 Triggers (SegmentSelection, WhatsApp, Lead)</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Tag: Meta Pixel - Init</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Tag: Meta Pixel - PageView</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Tag: Meta Pixel - SegmentSelection</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Tag: Meta Pixel - WhatsAppClick</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Tag: Meta Pixel - Lead</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Tag: GA4 Config (con server_container_url)</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> PUBLICADO</label>
+            
+            <h4 style="margin-top: 20px;">GTM Server (GTM-T2ZQP7WV):</h4>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Client GA4</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> 12 Variables Event Data</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Template Facebook CAPI</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Tag: Meta CAPI - All Events</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Trigger: All Events</label>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> PUBLICADO</label>
+            
+            <h4 style="margin-top: 20px;">WordPress:</h4>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Código tracking en functions.php</label>
+            
+            <h4 style="margin-top: 20px;">Meta:</h4>
+            <label class="checkbox-item"><input type="checkbox" onchange="updateProgress()"> Access Token generado (Pixel: 25699472449663830)</label>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p><strong>Guía creada para laserman.com.ar</strong></p>
+            <p>Pixel: 25699472449663830 | GTM Web: GTM-TNM9JZ3S | GTM Server: GTM-T2ZQP7WV</p>
+            <p>Stape: domine.laserman.com.ar</p>
+            <p style="margin-top: 20px;">
+                <button class="btn" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleStep(num) {
+            var content = document.getElementById('step' + num + '-content');
+            content.classList.toggle('active');
+        }
+        
+        function toggleAllSteps() {
+            var contents = document.querySelectorAll('.step-content');
+            var anyOpen = Array.from(contents).some(function(c) { return c.classList.contains('active'); });
+            contents.forEach(function(c) {
+                if (anyOpen) c.classList.remove('active');
+                else c.classList.add('active');
+            });
+        }
+        
+        function copyCode(btn) {
+            var code = btn.parentElement.querySelector('code').innerText;
+            navigator.clipboard.writeText(code).then(function() {
+                btn.innerText = '✅ Copiado!';
+                setTimeout(function() { btn.innerText = '📋 Copiar'; }, 2000);
+            });
+        }
+        
+        function updateProgress() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            var checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            var total = checkboxes.length;
+            var pct = Math.round((checked / total) * 100);
+            
+            document.getElementById('progressFill').style.width = pct + '%';
+            document.getElementById('progressFill').innerText = pct + '%';
+            
+            if (pct === 100) {
+                document.getElementById('progressText').innerHTML = '🎉 <strong>¡IMPLEMENTACIÓN COMPLETA!</strong>';
+            } else {
+                document.getElementById('progressText').innerHTML = checked + ' de ' + total + ' tareas completadas';
+            }
+            
+            checkboxes.forEach(function(cb) {
+                if (cb.checked) cb.parentElement.classList.add('checked');
+                else cb.parentElement.classList.remove('checked');
+            });
+            
+            localStorage.setItem('laserman-progress-2026', JSON.stringify(Array.from(checkboxes).map(function(cb) { return cb.checked; })));
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            var saved = localStorage.getItem('laserman-progress-2026');
+            if (saved) {
+                var state = JSON.parse(saved);
+                var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(function(cb, i) { if (state[i]) cb.checked = true; });
+                updateProgress();
+            }
+            document.getElementById('step1-content').classList.add('active');
+        });
+    </script>
+</body>
+</html>
