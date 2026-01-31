@@ -521,7 +521,7 @@ $data = dk_get_site_data();
         </div>
         <div class="border-2 border-neon/30 bg-neon/5 p-12">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-neon to-transparent opacity-50"></div>
-            <form id="contactForm" class="space-y-6 mb-8">
+            <form id="contactForm" action="https://formspree.io/f/xgvywzbq" method="POST" class="space-y-6 mb-8">
                 <input type="text"
                        name="nombre"
                        placeholder="NOMBRE"
